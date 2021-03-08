@@ -3,7 +3,7 @@ layout: default
 title: About
 ---
 <div class="about">
-    <p>I'm currently a mathematics masters student at University of Vermont, where I focus in graph theory.  I'm also a teaching assistant in the geology department. </p> 
+    <p>Currently I work as a Security Engineer.  Prior to that I was a mathematics masters student at University of Vermont, where I focused in graph theory.  I'm still interested and engaging with graph theory research.</p> 
 
 {% include image.html url="/images/me-and-rocks.jpg" description="Me and my rocks." %}
 
