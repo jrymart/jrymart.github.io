@@ -13,7 +13,7 @@ All that to say, I wanted to get this right, and I didn't want my love to overco
 ### The Lesson
 The lesson was zero code, zero pseudocode, just talking about things we all do, and pretending they're functions.  After going over different ways they might have used functions in the past, and giving two very general and informal definition, I talked about how we can thinking of our daily routines as functions, giving an example from my own life.  Then I had my students do the same.  Next I introduced the idea that we often want functions to take inputs, transform them, and return something.  After a few examples from me, I had students think of something they do for their research, and describe it as a function with input.  One of my students did this for processing samples in a scanning electron microscope, taking their thin section, preparing it, and returning some sort of quantitative output.
 ### The Takeaways
-All in all, I think it went well.  The feedback I got from my peers was that they found it helpful for developing that intuition, which not all of them had starting out.  
+All in all, I think it went well.  The feedback I got from my peers was that they found it helpful for developing that intuition, which not all of them had starting out.
 Figuring out what to put in a 10 minute lesson is *hard*, and I think I did a good but not great job fitting in enough that it's interesting but not being overly ambitious.
 I wish I had the students discuss their examples together a little more and it turned out my students did too, as expressed by their feedback.
 It was something I had thought about, but I didn't think I had time for.
