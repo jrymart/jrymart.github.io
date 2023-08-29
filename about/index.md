@@ -3,7 +3,7 @@ layout: default
 title: About
 ---
 <div class="about">
-    <p>Currently I work as a Security Engineer.  Prior to that I was a mathematics masters student at University of Vermont, where I focused in graph theory.  I'm still interested and engaging with graph theory research.</p> 
+    <p>Currently I am PhD Student at University of Colorado working with Greg Tucker.  Between degrees I had a stint as a Security Engineer.  Prior to that I was a mathematics masters student at University of Vermont, where I focused in graph theory.  I'm interested in developing novel mathematical and computational methods for problems of Landscape Evolution.</p>
 
 {% include image.html url="/images/me-and-rocks.jpg" description="Me and my rocks." %}
 
