@@ -3,10 +3,9 @@ layout: post
 title: "Small Projects over Tiny"
 date: 2024-03-27
 ---
-## Small Projects over Tiny
 A few months ago some friends of mine put together the silly and fun [One Knight Stand](https://oneknightstand.club).
 It's a fun little chess game I encourage you to check out; the gist is that you make one and only one move on a game before it is whisked away for someone else to make the next move, and so on and so on.
-My coding experience consits of a handful of CS classes and the type of code you write when you're a domain scientist and the only person in your lab group who writes code, so suffice to say I did not able to take part in the fast paced development of a web app.
+My coding experience consits of a handful of CS classes and the type of code you write when you're the only person in your lab group who writes code, so suffice to say I did not feel able to take part in the fast paced development of a web app.
 Fast forward to today: One Knight Stand has been working for a few months, and my friends are dutifully plugging away, periodically making improvements.
 I noticed a small, me-sized bug: your ELO score does not correctly display when you first log in; instead it updates after you make your first move of the session (later I realized it updates 20 seconds after a new session).
 I'm on spring break, so I decided to try to fix it.
