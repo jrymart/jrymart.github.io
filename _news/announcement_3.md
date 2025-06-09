@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2016-01-15 07:59:00-0400
+date: 2025-05-24 07:59:00-0400
 inline: true
 related_posts: false
 ---
 
-A simple inline announcement with Markdown emoji! :sparkles: :smile:
+[streetviewlock](https://github.com/jrymart/streetviewlock): a simple tool to lock your screen to a random google streetview image
