@@ -44,7 +44,40 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/teaching/";
           },
-        },{id: "books-the-godfather",
+        },{id: "post-small-projects-over-tiny",
+        
+          title: "Small Projects over Tiny",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2024/small_over_tiny/";
+          
+        },
+      },{id: "post-microteaching-about-functions",
+        
+          title: "Microteaching about Functions",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/microteaching/";
+          
+        },
+      },{id: "post-staying-on-top-of-research-with-rss-and-zotero",
+        
+          title: "Staying on top of research with RSS and Zotero",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/first-post/";
+          
+        },
+      },{id: "books-the-godfather",
           title: 'The Godfather',
           description: "",
           section: "Books",handler: () => {
