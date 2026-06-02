@@ -1,0 +1,469 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> SPD Animation LLM Benchmark | Jo R. Martin </title> <meta name="author" content="Jo R. Martin"> <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. "> <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website"> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link defer rel="stylesheet" href="/assets/css/scholar-icons.css?62b2ac103a88034e6882a5be5f3e2772"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%8F%9E%EF%B8%8F%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://jrymart.github.io/projects/spd_animation/"> <script src="/assets/js/theme.js?a81d82887dd692e91686b43de4542f18"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Jo</span> R. Martin </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">projects <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">cv </a> </li> <li class="nav-item "> <a class="nav-link" href="/teaching/">teaching </a> </li> <li class="nav-item"> <button id="search-toggle" title="Search" onclick="openSearchModal()"> <span class="nav-link">ctrl k <i class="ti ti-search"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="ti ti-sun-moon" id="light-toggle-system"></i> <i class="ti ti-moon-filled" id="light-toggle-dark"></i> <i class="ti ti-sun-filled" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">SPD Animation LLM Benchmark</h1> <p class="post-description"></p> </header> <article> <?xml version="1.0" encoding="utf-8"?> <meta http-equiv="Content-Type" content="text/html;charset=utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>Spd Animation</title> <meta name="author" content="Jo Martin"> <meta name="generator" content="Org Mode"> <style type="text/css">#content{max-width:60em;margin:auto}.title{text-align:center;margin-bottom:.2em}.subtitle{text-align:center;font-size:medium;font-weight:bold;margin-top:0}.todo{font-family:monospace;color:red}.done{font-family:monospace;color:green}.priority{font-family:monospace;color:orange}.tag{background-color:#eee;font-family:monospace;padding:2px;font-size:80%;font-weight:normal}.timestamp{color:#bebebe}.timestamp-kwd{color:#5f9ea0}.org-right{margin-left:auto;margin-right:0;text-align:right}.org-left{margin-left:0;margin-right:auto;text-align:left}.org-center{margin-left:auto;margin-right:auto;text-align:center}.underline{text-decoration:underline}#postamble p,#preamble p{font-size:90%;margin:.2em}p.verse{margin-left:3%}pre{border:1px solid #e6e6e6;border-radius:3px;background-color:#f2f2f2;padding:8pt;font-family:monospace;overflow:auto;margin:1.2em}pre.src{position:relative;overflow:auto}pre.src:before{display:none;position:absolute;top:-8px;right:12px;padding:3px;color:#555;background-color:#f2f2f299}pre.src:hover:before{display:inline;margin-top:14px}pre.src-asymptote:before{content:'Asymptote'}pre.src-awk:before{content:'Awk'}pre.src-authinfo::before{content:'Authinfo'}pre.src-C:before{content:'C'}pre.src-clojure:before{content:'Clojure'}pre.src-css:before{content:'CSS'}pre.src-D:before{content:'D'}pre.src-ditaa:before{content:'ditaa'}pre.src-dot:before{content:'Graphviz'}pre.src-calc:before{content:'Emacs Calc'}pre.src-emacs-lisp:before{content:'Emacs Lisp'}pre.src-fortran:before{content:'Fortran'}pre.src-gnuplot:before{content:'gnuplot'}pre.src-haskell:before{content:'Haskell'}pre.src-hledger:before{content:'hledger'}pre.src-java:before{content:'Java'}pre.src-js:before{content:'Javascript'}pre.src-latex:before{content:'LaTeX'}pre.src-ledger:before{content:'Ledger'}pre.src-lisp:before{content:'Lisp'}pre.src-lilypond:before{content:'Lilypond'}pre.src-lua:before{content:'Lua'}pre.src-matlab:before{content:'MATLAB'}pre.src-mscgen:before{content:'Mscgen'}pre.src-ocaml:before{content:'Objective Caml'}pre.src-octave:before{content:'Octave'}pre.src-org:before{content:'Org mode'}pre.src-oz:before{content:'OZ'}pre.src-plantuml:before{content:'Plantuml'}pre.src-processing:before{content:'Processing.js'}pre.src-python:before{content:'Python'}pre.src-R:before{content:'R'}pre.src-ruby:before{content:'Ruby'}pre.src-sass:before{content:'Sass'}pre.src-scheme:before{content:'Scheme'}pre.src-screen:before{content:'Gnu Screen'}pre.src-sed:before{content:'Sed'}pre.src-sh:before{content:'shell'}pre.src-sql:before{content:'SQL'}pre.src-sqlite:before{content:'SQLite'}pre.src-forth:before{content:'Forth'}pre.src-io:before{content:'IO'}pre.src-J:before{content:'J'}pre.src-makefile:before{content:'Makefile'}pre.src-maxima:before{content:'Maxima'}pre.src-perl:before{content:'Perl'}pre.src-picolisp:before{content:'Pico Lisp'}pre.src-scala:before{content:'Scala'}pre.src-shell:before{content:'Shell Script'}pre.src-ebnf2ps:before{content:'ebfn2ps'}pre.src-cpp:before{content:'C++'}pre.src-abc:before{content:'ABC'}pre.src-coq:before{content:'Coq'}pre.src-groovy:before{content:'Groovy'}pre.src-bash:before{content:'bash'}pre.src-csh:before{content:'csh'}pre.src-ash:before{content:'ash'}pre.src-dash:before{content:'dash'}pre.src-ksh:before{content:'ksh'}pre.src-mksh:before{content:'mksh'}
+pre.src-posh:before{content:'posh'}pre.src-ada:before{content:'Ada'}pre.src-asm:before{content:'Assembler'}pre.src-caml:before{content:'Caml'}pre.src-delphi:before{content:'Delphi'}pre.src-html:before{content:'HTML'}pre.src-idl:before{content:'IDL'}pre.src-mercury:before{content:'Mercury'}pre.src-metapost:before{content:'MetaPost'}pre.src-modula-2:before{content:'Modula-2'}pre.src-pascal:before{content:'Pascal'}pre.src-ps:before{content:'PostScript'}pre.src-prolog:before{content:'Prolog'}pre.src-simula:before{content:'Simula'}pre.src-tcl:before{content:'tcl'}pre.src-tex:before{content:'TeX'}pre.src-plain-tex:before{content:'Plain TeX'}pre.src-verilog:before{content:'Verilog'}pre.src-vhdl:before{content:'VHDL'}pre.src-xml:before{content:'XML'}pre.src-nxml:before{content:'XML'}pre.src-conf:before{content:'Configuration File'}table{border-collapse:collapse}caption.t-above{caption-side:top}caption.t-bottom{caption-side:bottom}td,th{vertical-align:top}th.org-right{text-align:center}th.org-left{text-align:center}th.org-center{text-align:center}td.org-right{text-align:right}td.org-left{text-align:left}td.org-center{text-align:center}dt{font-weight:bold}.footpara{display:inline}.footdef{margin-bottom:1em}.figure{padding:1em}.figure p{text-align:center}.equation-container{display:table;text-align:center;width:100%}.equation{vertical-align:middle}.equation-label{display:table-cell;text-align:right;vertical-align:middle}.inlinetask{padding:10px;border:2px solid gray;margin:10px;background:#ffc}#org-div-home-and-up{text-align:right;font-size:70%;white-space:nowrap}textarea{overflow-x:auto}.linenr{font-size:smaller}.code-highlighted{background-color:#ff0}.org-info-js_info-navigation{border-style:none}#org-info-js_console-label{font-size:10px;font-weight:bold;white-space:nowrap}.org-info-js_search-highlight{background-color:#ff0;color:#000;font-weight:bold}</style> <link rel="stylesheet" href="/assets/css/benchmark.css" type="text/css"> <script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script> <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"> </script> <div id="content" class="content"> <h1 class="title">Spd Animation</h1> <div id="table-of-contents" role="doc-toc"> <h2>Table of Contents</h2> <div id="text-table-of-contents" role="doc-toc"> <ul> <li><a href="#orge985397">1. Prompt</a></li> <li> <a href="#orgc7cccfb">2. Gemini 3.1 Flash Lite</a> <ul> <li> <a href="#org3fe29a0">2.1. Response</a> <ul> <li><a href="#org1537ef9">2.1.1. Prerequisites</a></li> <li><a href="#org1fe5afb">2.1.2. Landlab Evolution Script</a></li> <li><a href="#orgfedad7d">2.1.3. Key Components Explained</a></li> </ul> </li> <li><a href="#org8716c5d">2.2. Result</a></li> </ul> </li> <li> <a href="#org64ed030">3. Gemini 3.5 Flash</a> <ul> <li> <a href="#orgc96eb40">3.1. Response</a> <ul> <li><a href="#org5ff4dbc">3.1.1. Prerequisites</a></li> <li><a href="#orgdfd67fb">3.1.2. The Script</a></li> <li><a href="#org0b7abbe">3.1.3. Key Mechanics of this Script</a></li> </ul> </li> <li><a href="#orgccf9b4c">3.2. Result</a></li> </ul> </li> <li> <a href="#org1f87a1b">4. Claude Haiku 4.5</a> <ul> <li> <a href="#org3134208">4.1. Response</a> <ul> <li><a href="#org11f3ab0">4.1.1. <code>spd_animation.py</code></a></li> </ul> </li> <li><a href="#orgc4c716b">4.2. Result</a></li> </ul> </li> </ul> </div> </div> <p> This is a GenAI benchmark to help make the community aware of current large language model capabilities. In this benchmark, we test the ability of a model to write a script to create and run a streampower-diffusion landlab model, and save the results as an animation. </p> <div id="outline-container-orge985397" class="outline-2 prompt"> <h2 id="orge985397"> <span class="section-number-2">1.</span> Prompt</h2> <div class="outline-text-2" id="text-1"> <p> Please make me a script that runs a 50x50 streampower diffusion model in landlab and generate an animation of a landscape evolving. </p> </div> </div> <div id="outline-container-orgc7cccfb" class="outline-2"> <h2 id="orgc7cccfb"> <span class="section-number-2">2.</span> Gemini 3.1 Flash Lite</h2> <div class="outline-text-2" id="text-2"> </div> <div id="outline-container-org3fe29a0" class="outline-3 ai-response"> <h3 id="org3fe29a0"> <span class="section-number-3">2.1.</span> Response</h3> <div class="outline-text-3" id="text-2-1"> <p> To create a 50x50 landscape evolution model in Landlab, we will combine the <b>FlowAccumulator</b> (to route water), <b>FastscapeEroder</b> (to perform stream power incision), and <b>LinearDiffuser</b> (to smooth the landscape). </p> <p> The script below uses matplotlib.animation to save the output as a .gif. </p> </div> <div id="outline-container-org1537ef9" class="outline-4"> <h4 id="org1537ef9"> <span class="section-number-4">2.1.1.</span> Prerequisites</h4> <div class="outline-text-4" id="text-2-1-1"> <p> Ensure you have the necessary libraries installed: </p> <div class="org-src-container"> <pre class="src src-bash">pip install landlab matplotlib numpy
+</pre> </div> </div> </div> <div id="outline-container-org1fe5afb" class="outline-4"> <h4 id="org1fe5afb"> <span class="section-number-4">2.1.2.</span> Landlab Evolution Script</h4> <div class="outline-text-4" id="text-2-1-2"> <div class="org-src-container"> <pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">import</span> numpy <span style="color: #0000FF; font-weight: bold;">as</span> np
+<span style="color: #0000FF; font-weight: bold;">import</span> matplotlib.pyplot <span style="color: #0000FF; font-weight: bold;">as</span> plt
+<span style="color: #0000FF; font-weight: bold;">import</span> matplotlib.animation <span style="color: #0000FF; font-weight: bold;">as</span> animation
+<span style="color: #0000FF; font-weight: bold;">from</span> landlab <span style="color: #0000FF; font-weight: bold;">import</span> RasterModelGrid
+<span style="color: #0000FF; font-weight: bold;">from</span> landlab.components <span style="color: #0000FF; font-weight: bold;">import</span> FlowAccumulator, FastscapeEroder, LinearDiffuser
+<span style="color: #0000FF; font-weight: bold;">from</span> landlab.plot <span style="color: #0000FF; font-weight: bold;">import</span> imshow_grid
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">1. Setup Grid
+</span><span style="color: #BA36A5;">mg</span> = RasterModelGrid((50, 50), xy_spacing=10.0)
+<span style="color: #BA36A5;">z</span> = mg.add_zeros(<span style="color: #008000;">"topographic__elevation"</span>, at=<span style="color: #008000;">"node"</span>)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Add some initial random noise to the landscape
+</span><span style="color: #BA36A5;">z</span> += np.random.rand(mg.number_of_nodes) * 0.1
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">2. Boundary Conditions
+</span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Set edges to closed, except for the bottom (outlet)
+</span>mg.set_closed_boundaries_at_grid_edges(<span style="color: #D0372D;">True</span>, <span style="color: #D0372D;">True</span>, <span style="color: #D0372D;">True</span>, <span style="color: #D0372D;">False</span>)
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">3. Initialize Components
+</span><span style="color: #BA36A5;">fr</span> = FlowAccumulator(mg, flow_director=<span style="color: #008000;">'FlowDirectorD8'</span>)
+<span style="color: #BA36A5;">sp</span> = FastscapeEroder(mg, K_sp=0.0001, m_sp=0.5, n_sp=1.0)
+<span style="color: #BA36A5;">ld</span> = LinearDiffuser(mg, linear_diffusivity=0.01)
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">4. Simulation Parameters
+</span><span style="color: #BA36A5;">dt</span> = 1000
+<span style="color: #BA36A5;">total_time</span> = 500000
+<span style="color: #BA36A5;">uplift_rate</span> = 0.0001
+<span style="color: #BA36A5;">n_steps</span> = <span style="color: #006FE0;">int</span>(total_time // dt)
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">5. Animation Setup
+</span><span style="color: #BA36A5;">fig</span>, <span style="color: #BA36A5;">ax</span> = plt.subplots()
+<span style="color: #BA36A5;">artists</span> = []
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">6. Run Model
+</span><span style="color: #0000FF; font-weight: bold;">for</span> i <span style="color: #0000FF; font-weight: bold;">in</span> <span style="color: #006FE0;">range</span>(n_steps):
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Uplift
+</span>    <span style="color: #BA36A5;">z</span>[mg.core_nodes] += uplift_rate * dt
+    
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Process
+</span>    fr.run_one_step()
+    sp.run_one_step(dt)
+    ld.run_one_step(dt)
+    
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Store frames
+</span>    <span style="color: #0000FF; font-weight: bold;">if</span> i % 20 == 0:
+        <span style="color: #BA36A5;">im</span> = imshow_grid(mg, z, cmap=<span style="color: #008000;">'terrain'</span>, allow_colorbar=<span style="color: #D0372D;">False</span>, plot_name=f<span style="color: #008000;">"Time: </span>{i*dt}<span style="color: #008000;">"</span>)
+        artists.append([im])
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">7. Generate Animation
+</span><span style="color: #BA36A5;">ani</span> = animation.ArtistAnimation(fig, artists, interval=50, blit=<span style="color: #D0372D;">True</span>)
+ani.save(<span style="color: #008000;">'landscape_evolution.gif'</span>, writer=<span style="color: #008000;">'pillow'</span>)
+plt.show()
+</pre> </div> </div> </div> <div id="outline-container-orgfedad7d" class="outline-4"> <h4 id="orgfedad7d"> <span class="section-number-4">2.1.3.</span> Key Components Explained</h4> <div class="outline-text-4" id="text-2-1-3"> <dl class="org-dl"> <dt>RasterModelGrid((50, 50), …)</dt> <dd>Defines your simulation grid dimensions.</dd> <dt>FlowAccumulator</dt> <dd>Essential for any fluvial model; it calculates how water flows across the grid nodes.</dd> <dt>FastscapeEroder</dt> <dd>Implements the stream power incision law, where erosion rate is proportional to drainage area and slope.</dd> <dt>LinearDiffuser</dt> <dd>Simulates hillslope processes like soil creep, which rounds off ridges and fills valleys.</dd> <dt>ArtistAnimation</dt> <dd> <p> This method collects the visual output of the grid at specific intervals and stitches them into a GIF. The pillow writer is used here as it is cross-platform and doesn’t require external software like FFmpeg. </p> <p> Would you like to adjust the erosion parameters to create a more incised or more subdued landscape? </p> </dd> </dl> </div> </div> </div> <div id="outline-container-org8716c5d" class="outline-3 my-comment"> <h3 id="org8716c5d"> <span class="section-number-3">2.2.</span> Result</h3> <div class="outline-text-3" id="text-2-2"> <p> Code did not run as written, with the following error trace. I’m not sure if it’s because it’s using matplotlib.animation incorrectly or if it’s a different bug. </p> <div class="org-src-container"> <pre class="src src-python">Traceback (most recent call last):
+  File <span style="color: #008000;">"/home/jo/cub/csdms/genai_benchmarkets/spd_benchmark_gemini-3.1-flash-lite.py"</span>, line 49, <span style="color: #0000FF; font-weight: bold;">in</span> &lt;module&gt;
+    <span style="color: #BA36A5;">ani</span> = animation.ArtistAnimation(fig, artists, interval=50, blit=<span style="color: #D0372D;">True</span>)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File <span style="color: #008000;">"/home/jo/micromamba/envs/csdms_env/lib/python3.12/site-packages/matplotlib/animation.py"</span>, line 1491, <span style="color: #0000FF; font-weight: bold;">in</span> __init__
+    <span style="color: #006FE0;">super</span>().__init__(fig, *args, **kwargs)
+  File <span style="color: #008000;">"/home/jo/micromamba/envs/csdms_env/lib/python3.12/site-packages/matplotlib/animation.py"</span>, line 1417, <span style="color: #0000FF; font-weight: bold;">in</span> __init__
+    <span style="color: #006FE0;">super</span>().__init__(fig, event_source=event_source, *args, **kwargs)
+  File <span style="color: #008000;">"/home/jo/micromamba/envs/csdms_env/lib/python3.12/site-packages/matplotlib/animation.py"</span>, line 888, <span style="color: #0000FF; font-weight: bold;">in</span> __init__
+    <span style="color: #0000FF; font-weight: bold;">self</span>._setup_blit()
+  File <span style="color: #008000;">"/home/jo/micromamba/envs/csdms_env/lib/python3.12/site-packages/matplotlib/animation.py"</span>, line 1216, <span style="color: #0000FF; font-weight: bold;">in</span> _setup_blit
+    <span style="color: #0000FF; font-weight: bold;">self</span>._init_draw()
+  File <span style="color: #008000;">"/home/jo/micromamba/envs/csdms_env/lib/python3.12/site-packages/matplotlib/animation.py"</span>, line 1499, <span style="color: #0000FF; font-weight: bold;">in</span> _init_draw
+    artist.set_visible(<span style="color: #D0372D;">False</span>)
+    ^^^^^^^^^^^^^^^^^^
+<span style="color: #6434A3;">AttributeError</span>: <span style="color: #008000;">'NoneType'</span> <span style="color: #006FE0;">object</span> has no attribute <span style="color: #008000;">'set_visible'</span>
+
+</pre> </div> </div> </div> </div> <div id="outline-container-org64ed030" class="outline-2"> <h2 id="org64ed030"> <span class="section-number-2">3.</span> Gemini 3.5 Flash</h2> <div class="outline-text-2" id="text-3"> </div> <div id="outline-container-orgc96eb40" class="outline-3 ai-response"> <h3 id="orgc96eb40"> <span class="section-number-3">3.1.</span> Response</h3> <div class="outline-text-3" id="text-3-1"> <p> Here is a complete, self-contained Python script using the Landlab framework to run a \(50 \times 50\) landscape evolution model. It couples stream power (fluvial incision) with linear diffusion (hillslope creep) and uses Matplotlib to animate the landscape’s evolution over time. </p> </div> <div id="outline-container-org5ff4dbc" class="outline-4"> <h4 id="org5ff4dbc"> <span class="section-number-4">3.1.1.</span> Prerequisites</h4> <div class="outline-text-4" id="text-3-1-1"> <p> You will need landlab, numpy, and matplotlib installed. If you don’t have them, you can install them via pip: </p> <div class="org-src-container"> <pre class="src src-bash">pip install landlab numpy matplotlib
+</pre> </div> </div> </div> <div id="outline-container-orgdfd67fb" class="outline-4"> <h4 id="orgdfd67fb"> <span class="section-number-4">3.1.2.</span> The Script</h4> <div class="outline-text-4" id="text-3-1-2"> <p> This script initializes a flat grid with a tiny amount of random noise (to give the rivers a place to start), uplifts the landscape continuously, and forces the bottom edge to act as an open boundary (outlet) where water and sediment can escape. </p> <div class="org-src-container"> <pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">import</span> matplotlib.animation <span style="color: #0000FF; font-weight: bold;">as</span> animation
+<span style="color: #0000FF; font-weight: bold;">import</span> matplotlib.pyplot <span style="color: #0000FF; font-weight: bold;">as</span> plt
+<span style="color: #0000FF; font-weight: bold;">import</span> numpy <span style="color: #0000FF; font-weight: bold;">as</span> np
+<span style="color: #0000FF; font-weight: bold;">from</span> landlab <span style="color: #0000FF; font-weight: bold;">import</span> RasterModelGrid
+<span style="color: #0000FF; font-weight: bold;">from</span> landlab.components <span style="color: #0000FF; font-weight: bold;">import</span> FlowAccumulator, LinearDiffuser, StreamPowerEroder
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">==========================================
+</span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">1. Setup Grid and Parameters
+</span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">==========================================
+</span><span style="color: #BA36A5;">num_rows</span> = 50
+<span style="color: #BA36A5;">num_cols</span> = 50
+<span style="color: #BA36A5;">dx</span> = 10.0  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Grid spacing in meters
+</span>
+<span style="color: #BA36A5;">grid</span> = RasterModelGrid((num_rows, num_cols), xy_spacing=dx)
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Create the elevation field and add random noise to initiate drainage
+</span><span style="color: #BA36A5;">z</span> = grid.add_zeros(<span style="color: #008000;">"topographic__elevation"</span>, at=<span style="color: #008000;">"node"</span>)
+np.random.seed(42)
+<span style="color: #BA36A5;">z</span> += np.random.rand(grid.number_of_nodes) * 0.1
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Set boundary conditions: Bottom edge open, others closed
+</span>grid.set_closed_boundaries_at_grid_edges(
+    right_is_closed=<span style="color: #D0372D;">True</span>,
+    top_is_closed=<span style="color: #D0372D;">True</span>,
+    left_is_closed=<span style="color: #D0372D;">True</span>,
+    bottom_is_closed=<span style="color: #D0372D;">False</span>,
+)
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Time parameters
+</span><span style="color: #BA36A5;">dt</span> = 100.0  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Timestep in years
+</span><span style="color: #BA36A5;">total_steps</span> = 200  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Number of frames in animation
+</span><span style="color: #BA36A5;">uplift_rate</span> = 0.001  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Uplift rate in m/yr
+</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Component parameters
+</span><span style="color: #BA36A5;">K_sp</span> = 0.001  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Stream power erodibility coefficient
+</span><span style="color: #BA36A5;">m_sp</span> = 0.5  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Area exponent
+</span><span style="color: #BA36A5;">n_sp</span> = 1.0  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Slope exponent
+</span><span style="color: #BA36A5;">D</span> = 0.01  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Hillslope diffusivity (m^2/yr)
+</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">==========================================
+</span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">2. Initialize Landlab Components
+</span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">==========================================
+</span><span style="color: #BA36A5;">fa</span> = FlowAccumulator(grid, surface=<span style="color: #008000;">"topographic__elevation"</span>, flow_director=<span style="color: #008000;">"D8"</span>)
+<span style="color: #BA36A5;">sp</span> = StreamPowerEroder(grid, K_sp=K_sp, m_sp=m_sp, n_sp=n_sp)
+<span style="color: #BA36A5;">ld</span> = LinearDiffuser(grid, linear_diffusivity=D)
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">==========================================
+</span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">3. Setup Animation Plotting
+</span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">==========================================
+</span><span style="color: #BA36A5;">fig</span>, <span style="color: #BA36A5;">ax</span> = plt.subplots(figsize=(8, 6))
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Reshape elevation for 2D plotting
+</span><span style="color: #BA36A5;">z_matrix</span> = z.reshape((num_rows, num_cols))
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Initial plot setup
+</span><span style="color: #BA36A5;">im</span> = ax.imshow(
+    z_matrix,
+    cmap=<span style="color: #008000;">"terrain"</span>,
+    extent=[0, num_cols * dx, 0, num_rows * dx],
+    origin=<span style="color: #008000;">"lower"</span>,
+)
+fig.colorbar(im, ax=ax, label=<span style="color: #008000;">"Elevation (m)"</span>)
+<span style="color: #BA36A5;">title</span> = ax.set_title(<span style="color: #008000;">"Landscape Evolution: Year 0"</span>)
+ax.set_xlabel(<span style="color: #008000;">"X Distance (m)"</span>)
+ax.set_ylabel(<span style="color: #008000;">"Y Distance (m)"</span>)
+
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">==========================================
+</span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">4. Animation Update Function
+</span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">==========================================
+</span><span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">update_landscape</span>(frame):
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">1. Apply tectonic uplift to core (interior) nodes
+</span>    <span style="color: #BA36A5;">z</span>[grid.core_nodes] += uplift_rate * dt
+
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">2. Route flow across the landscape
+</span>    fa.run_one_step()
+
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">3. Fluvial incision (Stream Power)
+</span>    sp.run_one_step(dt)
+
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">4. Hillslope creep (Diffusion)
+</span>    ld.run_one_step(dt)
+
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Update visual data
+</span>    <span style="color: #BA36A5;">z_matrix</span> = z.reshape((num_rows, num_cols))
+    im.set_data(z_matrix)
+    im.set_clim(vmin=z_matrix.<span style="color: #006FE0;">min</span>(), vmax=z_matrix.<span style="color: #006FE0;">max</span>())
+    title.set_text(f<span style="color: #008000;">"Landscape Evolution: Year </span>{<span style="color: #006FE0;">int</span>((frame + 1) * dt)}<span style="color: #008000;">"</span>)
+
+    <span style="color: #0000FF; font-weight: bold;">return</span> [im, title]
+
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">==========================================
+</span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">5. Run and Save Animation
+</span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">==========================================
+</span><span style="color: #BA36A5;">ani</span> = animation.FuncAnimation(
+    fig,
+    update_landscape,
+    frames=total_steps,
+    interval=50,  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Delay between frames in ms
+</span>    blit=<span style="color: #D0372D;">False</span>,
+)
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">To view live while running, uncomment the line below:
+</span><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">plt.show()
+</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Save the animation as an MP4 file (requires ffmpeg)
+</span><span style="color: #BA36A5;">output_filename</span> = <span style="color: #008000;">"landscape_evolution.mp4"</span>
+<span style="color: #006FE0;">print</span>(f<span style="color: #008000;">"Running simulation and saving to </span>{output_filename}<span style="color: #008000;">..."</span>)
+ani.save(output_filename, writer=<span style="color: #008000;">"ffmpeg"</span>, fps=20)
+<span style="color: #006FE0;">print</span>(<span style="color: #008000;">"Done!"</span>)
+</pre> </div> </div> </div> <div id="outline-container-org0b7abbe" class="outline-4"> <h4 id="org0b7abbe"> <span class="section-number-4">3.1.3.</span> Key Mechanics of this Script</h4> <div class="outline-text-4" id="text-3-1-3"> <dl class="org-dl"> <dt>Boundary Conditions</dt> <dd>By setting bottom<sub>is</sub><sub>closed</sub>=False, the bottom row functions as a base-level boundary. Water and sediment empty out here, forcing dendritic channel networks to carve upward into the grid from this side.</dd> <dt>Component Coupling </dt> <dd>In every loop iteration (update<sub>landscape</sub>), the script routes water (FlowAccumulator), cuts valleys via water flow (StreamPowerEroder), and smooths steep ridges via gravity/soil creep (LinearDiffuser).</dd> <dt>Ffmpeg Requirement</dt> <dd>To save the animation as an .mp4, your machine needs ffmpeg installed. If you don’t have it, you can change the extension to “landscape<sub>evolution.gif</sub>” and swap the writer to writer=“pillow”.</dd> </dl> </div> </div> </div> <div id="outline-container-orgccf9b4c" class="outline-3 my-comment"> <h3 id="orgccf9b4c"> <span class="section-number-3">3.2.</span> Result</h3> <div class="outline-text-3" id="text-3-2"> <p> The script runs, generates a nice simple landscape evolution animation <video controls src="/assets/video/gemini-3-5-flash_landscape_evolution.mp4"></video> </p> </div> </div> </div> <div id="outline-container-org1f87a1b" class="outline-2"> <h2 id="org1f87a1b"> <span class="section-number-2">4.</span> Claude Haiku 4.5</h2> <div class="outline-text-2" id="text-4"> </div> <div id="outline-container-org3134208" class="outline-3 ai-response"> <h3 id="org3134208"> <span class="section-number-3">4.1.</span> Response</h3> <div class="outline-text-3" id="text-4-1"> <p> I’ll create a Python script that runs a stream power diffusion model in LandLab and generates an animation of the landscape evolution. [Editors note: This was generated as a standalone file to download] </p> </div> <div id="outline-container-org11f3ab0" class="outline-4"> <h4 id="org11f3ab0"> <span class="section-number-4">4.1.1.</span> <code>spd_animation.py</code> </h4> <div class="outline-text-4" id="text-4-1-1"> <div class="org-src-container"> <pre class="src src-python"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/usr/bin/env python3
+</span><span style="color: #036A07;">"""
+Stream Power + Diffusion (SPD) landscape evolution model in LandLab.
+Runs a 50x50 grid, evolves the topography, and generates an animation.
+"""</span>
+
+<span style="color: #0000FF; font-weight: bold;">import</span> numpy <span style="color: #0000FF; font-weight: bold;">as</span> np
+<span style="color: #0000FF; font-weight: bold;">import</span> matplotlib.pyplot <span style="color: #0000FF; font-weight: bold;">as</span> plt
+<span style="color: #0000FF; font-weight: bold;">import</span> matplotlib.animation <span style="color: #0000FF; font-weight: bold;">as</span> animation
+<span style="color: #0000FF; font-weight: bold;">from</span> matplotlib.colors <span style="color: #0000FF; font-weight: bold;">import</span> LightSource
+<span style="color: #0000FF; font-weight: bold;">from</span> landlab <span style="color: #0000FF; font-weight: bold;">import</span> RasterModelGrid
+<span style="color: #0000FF; font-weight: bold;">from</span> landlab.components <span style="color: #0000FF; font-weight: bold;">import</span> FlowRouter, StreamPowerEroder, LinearDiffuser
+<span style="color: #0000FF; font-weight: bold;">from</span> landlab.io.netcdf <span style="color: #0000FF; font-weight: bold;">import</span> write_netcdf
+
+
+<span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">run_spd_model</span>(
+    grid_size=50,
+    n_steps=500,
+    dt=100,
+    k_sp=1e-4,  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Stream power erodibility
+</span>    k_diff=0.01,  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Diffusivity coefficient
+</span>    m=0.5,  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Stream power slope exponent
+</span>    n=1.0,  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Stream power discharge exponent
+</span>):
+    <span style="color: #036A07;">"""
+    Run SPD landscape evolution model.
+    
+    Parameters
+    ----------
+    grid_size : int
+        Grid dimensions (grid_size x grid_size)
+    n_steps : int
+        Number of model iterations
+    dt : float
+        Time step in years
+    k_sp : float
+        Stream power erodibility coefficient
+    k_diff : float
+        Hillslope diffusivity
+    m : float
+        Stream power slope exponent
+    n : float
+        Stream power discharge exponent
+    
+    Returns
+    -------
+    grid : RasterModelGrid
+        Final model grid
+    elevation_history : list
+        Elevation arrays at each saved timestep
+    time_steps : list
+        Corresponding model times (years)
+    """</span>
+    
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Create grid
+</span>    <span style="color: #BA36A5;">grid</span> = RasterModelGrid((grid_size, grid_size), xy_spacing=50.0)
+    
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Add elevation field (initial condition: gentle noise on a slope)
+</span>    np.random.seed(42)
+    <span style="color: #BA36A5;">x</span>, <span style="color: #BA36A5;">y</span> = grid.x_of_node, grid.y_of_node
+    <span style="color: #BA36A5;">base_elev</span> = 1000 + 0.001 * y  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Gentle slope towards north
+</span>    <span style="color: #BA36A5;">noise</span> = np.random.normal(0, 5, grid.number_of_nodes)
+    <span style="color: #BA36A5;">elevation</span> = base_elev + noise
+    grid.add_field(<span style="color: #008000;">"topographic__elevation"</span>, elevation, at=<span style="color: #008000;">"node"</span>)
+    
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Set boundary conditions (fixed elevation at edges)
+</span>    grid.set_watershed_boundary_condition_outlet_id(
+        0, grid.nodes[0, 0], -9999
+    )
+    
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Initialize components
+</span>    <span style="color: #BA36A5;">flow_router</span> = FlowRouter(grid)
+    <span style="color: #BA36A5;">sp_eroder</span> = StreamPowerEroder(grid, K=k_sp, m=m, n=n, threshold_sp=0)
+    <span style="color: #BA36A5;">diffuser</span> = LinearDiffuser(grid, linear_diffusivity=k_diff)
+    
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Storage for animation
+</span>    <span style="color: #BA36A5;">elevation_history</span> = []
+    <span style="color: #BA36A5;">time_steps</span> = []
+    <span style="color: #BA36A5;">save_interval</span> = <span style="color: #006FE0;">max</span>(1, n_steps // 50)  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Save ~50 frames
+</span>    
+    <span style="color: #BA36A5;">current_time</span> = 0
+    
+    <span style="color: #006FE0;">print</span>(f<span style="color: #008000;">"Running </span>{n_steps}<span style="color: #008000;"> steps on a </span>{grid_size}<span style="color: #008000;">x</span>{grid_size}<span style="color: #008000;"> grid..."</span>)
+    
+    <span style="color: #0000FF; font-weight: bold;">for</span> step <span style="color: #0000FF; font-weight: bold;">in</span> <span style="color: #006FE0;">range</span>(n_steps):
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Route flow
+</span>        flow_router.run_one_step()
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Erode with stream power
+</span>        sp_eroder.run_one_step(dt)
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Diffuse hillslopes
+</span>        diffuser.run_one_step(dt)
+        
+        <span style="color: #BA36A5;">current_time</span> += dt
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Save frame for animation
+</span>        <span style="color: #0000FF; font-weight: bold;">if</span> step % save_interval == 0:
+            elevation_history.append(grid[<span style="color: #008000;">"topographic__elevation"</span>].copy())
+            time_steps.append(current_time)
+        
+        <span style="color: #0000FF; font-weight: bold;">if</span> (step + 1) % 50 == 0:
+            <span style="color: #006FE0;">print</span>(f<span style="color: #008000;">"  Step </span>{step + 1}<span style="color: #008000;">/</span>{n_steps}<span style="color: #008000;"> (t=</span>{current_time/1000:.1f}<span style="color: #008000;"> ky)"</span>)
+    
+    <span style="color: #006FE0;">print</span>(f<span style="color: #008000;">"Model complete. Final time: </span>{current_time/1000:.1f}<span style="color: #008000;"> ky"</span>)
+    <span style="color: #0000FF; font-weight: bold;">return</span> grid, elevation_history, time_steps
+
+
+<span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">create_animation</span>(elevation_history, time_steps, output_file=<span style="color: #008000;">"spd_evolution.mp4"</span>):
+    <span style="color: #036A07;">"""
+    Create and save animation of landscape evolution.
+    
+    Parameters
+    ----------
+    elevation_history : list
+        List of elevation arrays
+    time_steps : list
+        List of corresponding times
+    output_file : str
+        Output video filename
+    """</span>
+    
+    <span style="color: #BA36A5;">fig</span>, <span style="color: #BA36A5;">ax</span> = plt.subplots(figsize=(10, 9))
+    
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Set up color limits for consistent scaling
+</span>    <span style="color: #BA36A5;">vmin</span> = <span style="color: #006FE0;">min</span>(arr.<span style="color: #006FE0;">min</span>() <span style="color: #0000FF; font-weight: bold;">for</span> arr <span style="color: #0000FF; font-weight: bold;">in</span> elevation_history)
+    <span style="color: #BA36A5;">vmax</span> = <span style="color: #006FE0;">max</span>(arr.<span style="color: #006FE0;">max</span>() <span style="color: #0000FF; font-weight: bold;">for</span> arr <span style="color: #0000FF; font-weight: bold;">in</span> elevation_history)
+    
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Reshape for 2D visualization
+</span>    <span style="color: #BA36A5;">grid_size</span> = <span style="color: #006FE0;">int</span>(np.sqrt(<span style="color: #006FE0;">len</span>(elevation_history[0])))
+    
+    <span style="color: #BA36A5;">im</span> = <span style="color: #D0372D;">None</span>
+    
+    <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">update</span>(frame):
+        <span style="color: #0000FF; font-weight: bold;">nonlocal</span> im
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Reshape elevation to 2D grid
+</span>        <span style="color: #BA36A5;">elev_2d</span> = elevation_history[frame].reshape((grid_size, grid_size))
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Clear previous image
+</span>        <span style="color: #0000FF; font-weight: bold;">if</span> im <span style="color: #0000FF; font-weight: bold;">is</span> <span style="color: #0000FF; font-weight: bold;">not</span> <span style="color: #D0372D;">None</span>:
+            im.remove()
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Plot with hillshade for better visualization
+</span>        <span style="color: #BA36A5;">ls</span> = LightSource(azdeg=315, altdeg=45)
+        <span style="color: #BA36A5;">hillshade</span> = ls.hillshade(elev_2d, vert_exag=2)
+        
+        <span style="color: #BA36A5;">im</span> = ax.imshow(
+            hillshade,
+            cmap=<span style="color: #008000;">"gray"</span>,
+            origin=<span style="color: #008000;">"lower"</span>,
+            extent=[0, grid_size * 50, 0, grid_size * 50],
+        )
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Add elevation contours
+</span>        <span style="color: #BA36A5;">contours</span> = ax.contour(
+            elev_2d,
+            levels=10,
+            colors=<span style="color: #008000;">"white"</span>,
+            alpha=0.3,
+            extent=[0, grid_size * 50, 0, grid_size * 50],
+            linewidths=0.5,
+        )
+        
+        <span style="color: #BA36A5;">time_ka</span> = time_steps[frame] / 1000
+        ax.set_title(
+            f<span style="color: #008000;">"SPD Landscape Evolution</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">Time: </span>{time_ka:.1f}<span style="color: #008000;"> ka"</span>,
+            fontsize=14,
+            fontweight=<span style="color: #008000;">"bold"</span>,
+        )
+        ax.set_xlabel(<span style="color: #008000;">"Distance (m)"</span>)
+        ax.set_ylabel(<span style="color: #008000;">"Distance (m)"</span>)
+        
+        <span style="color: #0000FF; font-weight: bold;">return</span> [im]
+    
+    <span style="color: #BA36A5;">anim</span> = animation.FuncAnimation(
+        fig,
+        update,
+        frames=<span style="color: #006FE0;">len</span>(elevation_history),
+        interval=50,
+        blit=<span style="color: #D0372D;">True</span>,
+        repeat=<span style="color: #D0372D;">True</span>,
+    )
+    
+    <span style="color: #006FE0;">print</span>(f<span style="color: #008000;">"Saving animation to </span>{output_file}<span style="color: #008000;">..."</span>)
+    anim.save(output_file, writer=<span style="color: #008000;">"ffmpeg"</span>, dpi=100)
+    <span style="color: #006FE0;">print</span>(f<span style="color: #008000;">"Animation saved!"</span>)
+    
+    plt.close(fig)
+
+
+<span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">plot_summary</span>(grid, elevation_history):
+    <span style="color: #036A07;">"""Plot initial and final topography."""</span>
+    
+    <span style="color: #BA36A5;">grid_size</span> = <span style="color: #006FE0;">int</span>(np.sqrt(<span style="color: #006FE0;">len</span>(elevation_history[0])))
+    
+    <span style="color: #BA36A5;">fig</span>, <span style="color: #BA36A5;">axes</span> = plt.subplots(1, 2, figsize=(14, 6))
+    
+    <span style="color: #BA36A5;">elev_init</span> = elevation_history[0].reshape((grid_size, grid_size))
+    <span style="color: #BA36A5;">elev_final</span> = elevation_history[-1].reshape((grid_size, grid_size))
+    
+    <span style="color: #BA36A5;">im0</span> = axes[0].imshow(elev_init, cmap=<span style="color: #008000;">"viridis"</span>, origin=<span style="color: #008000;">"lower"</span>)
+    axes[0].set_title(<span style="color: #008000;">"Initial Topography"</span>, fontweight=<span style="color: #008000;">"bold"</span>)
+    axes[0].set_xlabel(<span style="color: #008000;">"Grid index"</span>)
+    axes[0].set_ylabel(<span style="color: #008000;">"Grid index"</span>)
+    plt.colorbar(im0, ax=axes[0], label=<span style="color: #008000;">"Elevation (m)"</span>)
+    
+    <span style="color: #BA36A5;">im1</span> = axes[1].imshow(elev_final, cmap=<span style="color: #008000;">"viridis"</span>, origin=<span style="color: #008000;">"lower"</span>)
+    axes[1].set_title(<span style="color: #008000;">"Final Topography"</span>, fontweight=<span style="color: #008000;">"bold"</span>)
+    axes[1].set_xlabel(<span style="color: #008000;">"Grid index"</span>)
+    axes[1].set_ylabel(<span style="color: #008000;">"Grid index"</span>)
+    plt.colorbar(im1, ax=axes[1], label=<span style="color: #008000;">"Elevation (m)"</span>)
+    
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Add relief and slope info
+</span>    <span style="color: #BA36A5;">relief_init</span> = elev_init.<span style="color: #006FE0;">max</span>() - elev_init.<span style="color: #006FE0;">min</span>()
+    <span style="color: #BA36A5;">relief_final</span> = elev_final.<span style="color: #006FE0;">max</span>() - elev_final.<span style="color: #006FE0;">min</span>()
+    
+    fig.text(
+        0.5,
+        0.02,
+        f<span style="color: #008000;">"Initial relief: </span>{relief_init:.1f}<span style="color: #008000;"> m | Final relief: </span>{relief_final:.1f}<span style="color: #008000;"> m"</span>,
+        ha=<span style="color: #008000;">"center"</span>,
+        fontsize=11,
+    )
+    
+    plt.tight_layout()
+    plt.subplots_adjust(bottom=0.08)
+    plt.savefig(<span style="color: #008000;">"spd_summary.png"</span>, dpi=150, bbox_inches=<span style="color: #008000;">"tight"</span>)
+    <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"Summary figure saved to spd_summary.png"</span>)
+    plt.close(fig)
+
+
+<span style="color: #0000FF; font-weight: bold;">if</span> <span style="color: #006FE0;">__name__</span> == <span style="color: #008000;">"__main__"</span>:
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Run model
+</span>    <span style="color: #BA36A5;">grid</span>, <span style="color: #BA36A5;">elev_hist</span>, <span style="color: #BA36A5;">times</span> = run_spd_model(
+        grid_size=50,
+        n_steps=500,
+        dt=100,
+        k_sp=1e-4,
+        k_diff=0.01,
+        m=0.5,
+        n=1.0,
+    )
+    
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Create animation
+</span>    create_animation(elev_hist, times, <span style="color: #008000;">"spd_evolution.mp4"</span>)
+    
+    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Plot summary
+</span>    plot_summary(grid, elev_hist)
+    
+    <span style="color: #006FE0;">print</span>(<span style="color: #008000;">"</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">Done! Check spd_evolution.mp4 and spd_summary.png"</span>)
+</pre> </div> <p> I’ve created a complete SPD landscape evolution script for you. Here’s what it does: <b>Key features:</b> </p> <ul class="org-ul"> <li>Runs a 50×50 grid with stream power erosion + hillslope diffusion</li> <li>500 timesteps (100-year increments, easily tunable)</li> <li>Saves ~50 frames for smooth animation</li> <li>Generates an MP4 with hillshade visualization and elevation contours</li> <li>Creates a summary PNG comparing initial vs. final topography</li> </ul> <p> <b>To run it</b> </p> <div class="org-src-container"> <pre class="src src-bash">python spd_animation.py
+</pre> </div> <p> <b>Requirements:</b> </p> <div class="org-src-container"> <pre class="src src-bash">pip install landlab matplotlib numpy ffmpeg-python
+</pre> </div> <p> The model parameters are customizable in the <code>run_spd_model()</code> call: </p> <dl class="org-dl"> <dt><code>k_sp=1e-4</code></dt> <dd>Stream power erodibility (higher = more incision)</dd> <dt>~k<sub>diff</sub>=0.001</dt> <dd>Hillslope diffusivity (higher = more smoothing)</dd> <dt> <code>m</code> and <code>n</code> </dt> <dd>Exponents in the stream power law</dd> <dt><code>dt</code></dt> <dd>Time step (100 years per step works well)</dd> <dt><code>n_steps</code></dt> <dd> <p> Total iterations </p> <p> The animation visualizes landscape evolution with hillshading (standard geomorphology style), contours for elevation structure, and a time counter in ka. The summary figure shows relief change over the model run. </p> </dd> </dl> </div> </div> </div> <div id="outline-container-orgc4c716b" class="outline-3 my-comment"> <h3 id="orgc4c716b"> <span class="section-number-3">4.2.</span> Result</h3> <div class="outline-text-3" id="text-4-2"> <p> Script did not run as written, it uses a hallucinated <code>FlowRouter</code> component, instead of <code>FlowAccumulator</code>. </p> <div class="org-src-container"> <pre class="src src-python">Traceback (most recent call last):
+  File <span style="color: #008000;">"/home/jo/cub/csdms/genai_benchmarkets/spd_benchmark_claude-haiku-4.5.py"</span>, line 12, <span style="color: #0000FF; font-weight: bold;">in</span> &lt;module&gt;
+    <span style="color: #0000FF; font-weight: bold;">from</span> landlab.components <span style="color: #0000FF; font-weight: bold;">import</span> FlowRouter, StreamPowerEroder, LinearDiffuser
+<span style="color: #6434A3;">ImportError</span>: cannot <span style="color: #0000FF; font-weight: bold;">import</span> name <span style="color: #008000;">'FlowRouter'</span> <span style="color: #0000FF; font-weight: bold;">from</span> <span style="color: #008000;">'landlab.components'</span> (/home/jo/micromamba/envs/csdms_env/lib/python3.12/site-packages/landlab/components/__init__.py)
+</pre> </div> </div> </div> </div> </div> <div id="postamble" class="status"> <p class="author">Author: Jo Martin</p> <p class="date">Created: 2026-06-02 Tue 11:15</p> </div> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Jo R. Martin. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?a0db7e5d5c70cc3252b3138b0c91dcaf" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script src="/assets/js/no_defer.js?2781658a0a2b13ed609542042a859126"></script> <script defer src="/assets/js/common.js?e0514a05c5c95ac1a93a8dfd5249b92e"></script> <script defer src="/assets/js/copy_code.js?c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/js/mathjax-setup.js?a5bb4e6a542c546dd929b24b8b236dfd"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script defer src="/assets/js/progress-bar.js?2f30e0e6801ea8f5036fa66e1ab0a71a" type="text/javascript"></script> <script src="/assets/js/vanilla-back-to-top.min.js?f40d453793ff4f64e238e420181a1d17"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/js/search/ninja-keys.min.js?a3446f084dcaecc5f75aa1757d087dcf"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/js/search-setup.js?6c304f7b1992d4b60f7a07956e52f04a"></script> <script src="/assets/js/search-data.js"></script> <script src="/assets/js/shortcut-key.js?6f508d74becd347268a7f822bca7309d"></script> </body> </html>
