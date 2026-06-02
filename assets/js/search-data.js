@@ -91,7 +91,12 @@ ninja.data = [{
           section: "News",},{id: "news-streetviewlock-a-simple-tool-to-lock-your-screen-to-a-random-google-streetview-image",
           title: 'streetviewlock: a simple tool to lock your screen to a random google streetview...',
           description: "",
-          section: "News",},{
+          section: "News",},{id: "projects-spd-animation-llm-benchmark",
+          title: 'SPD Animation LLM Benchmark',
+          description: "",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/spd_animation/";
+            },},{
         id: 'social-email',
         title: 'email',
         section: 'Socials',
