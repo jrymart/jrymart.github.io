@@ -46,14 +46,14 @@
 (setq org-publish-project-alist
       `(("site-pages"
          :base-directory ,(expand-file-name "org" site-root)
-         :publishing-directory ,(expand-file-name "public" site-root)
+         :publishing-directory ,(expand-file-name "docs" site-root)
          :recursive t
          :exclude "blog/\\|projects/"  ; handled separately
          ,@site-html-settings)
 
         ("site-blog"
          :base-directory ,(expand-file-name "org/blog" site-root)
-         :publishing-directory ,(expand-file-name "public/blog" site-root)
+         :publishing-directory ,(expand-file-name "docs/blog" site-root)
          :recursive t
          :auto-sitemap t
          :sitemap-title "Blog"
@@ -63,7 +63,7 @@
 
         ("site-projects"
          :base-directory ,(expand-file-name "org/projects" site-root)
-         :publishing-directory ,(expand-file-name "public/projects" site-root)
+         :publishing-directory ,(expand-file-name "docs/projects" site-root)
          :recursive t
          :auto-sitemap t
          :sitemap-title "Projects"
@@ -75,7 +75,7 @@
          :base-directory ,(expand-file-name "assets" site-root)
          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|webp\\|mp4"
          :recursive t
-         :publishing-directory ,(expand-file-name "public/assets" site-root)
+         :publishing-directory ,(expand-file-name "docs/assets" site-root)
          :publishing-function org-publish-attachment)
 
         ("site" :components ("site-blog" "site-projects" "site-pages" "site-assets"))))
