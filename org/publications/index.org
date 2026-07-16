@@ -1,0 +1,11 @@
+#+title: Publications
+
+* Preprints
+
+- *Martin, J. R.* & Tucker, G. E. (2026). [[https://doi.org/10.22541/essoar.15004831/v1][Can Neural Networks Think Like Geomorphologists?]] /ESSOAr preprint/.
+
+* Peer-Reviewed
+
+- *Martin, J. R.* & Rombach, P. (2022). [[https://doi.org/10.37236/9851][Guessing Numbers and Extremal Graph Theory]]. /The Electronic Journal of Combinatorics/, 29(2).
+
+- Pennington, D., Ebert-Uphoff, I., Freed, N., *Martin, J. R.*, & Pierce, S. A. (2019). [[https://doi.org/10.1007/s11625-019-00735-3][Bridging sustainability science, earth science, and data science through interdisciplinary education]]. /Sustainability Science/.

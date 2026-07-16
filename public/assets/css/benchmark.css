@@ -1,0 +1,156 @@
+/* ==========================================================================
+   benchmark.css
+   Visual differentiation for GenAI benchmark Org exports.
+
+   Three section roles are color-coded so you can tell at a glance, while
+   scrolling, which block is the prompt, which is a model's response, and
+   which is your own evaluation:
+
+     .prompt       the question you posed            (blue)
+     .ai-response  a model's output                  (slate / neutral)
+     .my-comment   your evaluation / "Result" notes  (amber)
+
+   These classes come from per-headline Org properties:
+
+     :PROPERTIES:
+     :HTML_CONTAINER_CLASS: prompt        (on the "Prompt" headline)
+     :HTML_CONTAINER_CLASS: ai-response   (on each "Response" headline)
+     :HTML_CONTAINER_CLASS: my-comment    (on each "Result" headline)
+     :END:
+
+   If you don't want to touch the Org source, see the NO-EDIT FALLBACK
+   block at the bottom of this file.
+   ========================================================================== */
+
+:root {
+  --prompt-accent:   #2563eb;   /* blue   */
+  --prompt-bg:       #eff4ff;
+  --prompt-badge-fg: #1e40af;
+
+  --resp-accent:     #64748b;   /* slate  */
+  --resp-bg:         #f7f8fa;
+  --resp-badge-fg:   #475569;
+
+  --comment-accent:  #d97706;   /* amber  */
+  --comment-bg:      #fff8e8;
+  --comment-badge-fg:#92600a;
+
+  --role-radius: 6px;
+}
+
+/* --- shared block treatment ---------------------------------------------- */
+.prompt,
+.ai-response,
+.my-comment {
+  position: relative;
+  border-left: 5px solid transparent;
+  border-radius: var(--role-radius);
+  padding: 0.4em 1.25em 0.6em;
+  margin: 1.6em 0;
+}
+
+/* small role badge, sits above the section heading.
+   Delete these three ::before rules if you'd rather rely on color alone. */
+.prompt      > h2::before,
+.ai-response > h3::before,
+.my-comment  > h3::before {
+  display: inline-block;
+  margin-bottom: 0.35em;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font: 600 11px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+/* keep nested code blocks from inheriting the tinted block background awkwardly */
+.prompt pre,
+.ai-response pre,
+.my-comment pre {
+  background-color: #ffffff;
+}
+
+/* --- prompt -------------------------------------------------------------- */
+.prompt {
+  background: var(--prompt-bg);
+  border-left-color: var(--prompt-accent);
+}
+.prompt > h2::before {
+  content: "Prompt";
+  color: var(--prompt-badge-fg);
+  background: #dbe6ff;
+  margin-right: 0.6em;
+}
+
+/* --- ai response --------------------------------------------------------- */
+.ai-response {
+  background: var(--resp-bg);
+  border-left-color: var(--resp-accent);
+}
+.ai-response > h3::before {
+  content: "AI output";
+  color: var(--resp-badge-fg);
+  background: #e7eaef;
+  margin-right: 0.6em;
+}
+
+/* --- my comment ---------------------------------------------------------- */
+.my-comment {
+  background: var(--comment-bg);
+  border-left-color: var(--comment-accent);
+}
+.my-comment > h3::before {
+  content: "My evaluation";
+  color: var(--comment-badge-fg);
+  background: #fce9c4;
+  margin-right: 0.6em;
+}
+
+/* Optional: gently de-emphasize the auto-numbered section prefix so the
+   color/badge reads first. Comment out to keep Org's "2.1." numbering bold. */
+.prompt .section-number-2,
+.ai-response .section-number-3,
+.my-comment .section-number-3 {
+  color: #9aa3af;
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   NO-EDIT FALLBACK
+   --------------------------------------------------------------------------
+   If you do NOT add the :HTML_CONTAINER_CLASS: properties to the Org source,
+   uncomment the block below INSTEAD of relying on the classed selectors above.
+   It infers roles from document shape in the current export:
+     - Prompt   = an outline-2 section with no outline-3 subsections
+     - Response = an outline-3 section that contains outline-4 sub-headings
+     - Result   = an outline-3 section with no outline-4 sub-headings
+   This is more brittle (it depends on each response having sub-headings and
+   each result not), so prefer the property-based approach when you can.
+   ==========================================================================
+
+.outline-2:not(:has(.outline-3)) {
+  background: var(--prompt-bg);
+  border-left: 5px solid var(--prompt-accent);
+  border-radius: var(--role-radius);
+  padding: 0.4em 1.25em 0.6em;
+  margin: 1.6em 0;
+}
+
+.outline-3:has(.outline-4) {
+  background: var(--resp-bg);
+  border-left: 5px solid var(--resp-accent);
+  border-radius: var(--role-radius);
+  padding: 0.4em 1.25em 0.6em;
+  margin: 1.6em 0;
+}
+
+.outline-3:not(:has(.outline-4)) {
+  background: var(--comment-bg);
+  border-left: 5px solid var(--comment-accent);
+  border-radius: var(--role-radius);
+  padding: 0.4em 1.25em 0.6em;
+  margin: 1.6em 0;
+}
+
+*/

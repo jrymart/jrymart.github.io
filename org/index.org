@@ -1,0 +1,15 @@
+#+title: Index
+#+OPTIONS: title:nil
+
+#+BEGIN_EXPORT html
+<div class="profile">
+  <h1>Jo R. Martin</h1>
+  <div class="profile-content">
+    <div class="profile-text">
+      <p>I am a PhD candidate in the department of Geological Sciences at the University of Colorado, Boulder. I am supervised by Gregory Tucker, and my research involves building and interpreting neural networks that can find subtle and complex signals in topography that can tell us about the processes and properties that shape landscapes.</p>
+      <p>I obtained my MS at the University of Vermont where I worked with Puck Rombach to solve a problem in extremal graph theory. I have also worked as a cybersecurity engineer, GIS technician, and wrangled hippies in a commercial kitchen.</p>
+    </div>
+    <img src="/assets/img/me-on-rocks.webp" class="profile-photo" alt="Jo R. Martin">
+  </div>
+</div>
+#+END_EXPORT

@@ -1,0 +1,547 @@
+#+title: Spd Animation
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" href="/assets/css/benchmark.css" type="text/css" />
+
+This is a GenAI benchmark to help make the community aware of current large language model capabilities.  In this benchmark, we test the ability of a model to write a script to create and run a streampower-diffusion landlab model, and save the results as an animation.
+* Prompt
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: prompt
+:END:
+Please make me a script that runs a 50x50 streampower diffusion model in landlab and generate an animation of a landscape evolving.  
+* Gemini 3.1 Flash Lite 
+** Response
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: ai-response
+:END:
+To create a 50x50 landscape evolution model in Landlab, we will combine the *FlowAccumulator* (to route water), *FastscapeEroder* (to perform stream power incision), and *LinearDiffuser* (to smooth the landscape).
+
+The script below uses matplotlib.animation to save the output as a .gif.
+*** Prerequisites
+
+Ensure you have the necessary libraries installed:
+#+begin_src bash
+pip install landlab matplotlib numpy
+#+end_src
+*** Landlab Evolution Script
+#+begin_src python :tangle spd_benchmark_gemini-3.1-flash-lite.py
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from landlab import RasterModelGrid
+from landlab.components import FlowAccumulator, FastscapeEroder, LinearDiffuser
+from landlab.plot import imshow_grid
+
+# 1. Setup Grid
+mg = RasterModelGrid((50, 50), xy_spacing=10.0)
+z = mg.add_zeros("topographic__elevation", at="node")
+# Add some initial random noise to the landscape
+z += np.random.rand(mg.number_of_nodes) * 0.1
+
+# 2. Boundary Conditions
+# Set edges to closed, except for the bottom (outlet)
+mg.set_closed_boundaries_at_grid_edges(True, True, True, False)
+
+# 3. Initialize Components
+fr = FlowAccumulator(mg, flow_director='FlowDirectorD8')
+sp = FastscapeEroder(mg, K_sp=0.0001, m_sp=0.5, n_sp=1.0)
+ld = LinearDiffuser(mg, linear_diffusivity=0.01)
+
+# 4. Simulation Parameters
+dt = 1000
+total_time = 500000
+uplift_rate = 0.0001
+n_steps = int(total_time // dt)
+
+# 5. Animation Setup
+fig, ax = plt.subplots()
+artists = []
+
+# 6. Run Model
+for i in range(n_steps):
+    # Uplift
+    z[mg.core_nodes] += uplift_rate * dt
+    
+    # Process
+    fr.run_one_step()
+    sp.run_one_step(dt)
+    ld.run_one_step(dt)
+    
+    # Store frames
+    if i % 20 == 0:
+        im = imshow_grid(mg, z, cmap='terrain', allow_colorbar=False, plot_name=f"Time: {i*dt}")
+        artists.append([im])
+
+# 7. Generate Animation
+ani = animation.ArtistAnimation(fig, artists, interval=50, blit=True)
+ani.save('landscape_evolution.gif', writer='pillow')
+plt.show()
+#+end_src
+
+#+RESULTS:
+
+*** Key Components Explained
+- RasterModelGrid((50, 50), ...) :: Defines your simulation grid dimensions.
+- FlowAccumulator :: Essential for any fluvial model; it calculates how water flows across the grid nodes.
+- FastscapeEroder :: Implements the stream power incision law, where erosion rate is proportional to drainage area and slope.
+- LinearDiffuser :: Simulates hillslope processes like soil creep, which rounds off ridges and fills valleys.
+- ArtistAnimation :: This method collects the visual output of the grid at specific intervals and stitches them into a GIF. The pillow writer is used here as it is cross-platform and doesn't require external software like FFmpeg.
+
+  Would you like to adjust the erosion parameters to create a more incised or more subdued landscape?
+
+** Result
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: my-comment
+:END:
+Code did not run as written, with the following error trace.  I'm not sure if it's because it's using matplotlib.animation incorrectly or if it's a different bug.
+#+begin_src python
+Traceback (most recent call last):
+  File "/home/jo/cub/csdms/genai_benchmarkets/spd_benchmark_gemini-3.1-flash-lite.py", line 49, in <module>
+    ani = animation.ArtistAnimation(fig, artists, interval=50, blit=True)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jo/micromamba/envs/csdms_env/lib/python3.12/site-packages/matplotlib/animation.py", line 1491, in __init__
+    super().__init__(fig, *args, **kwargs)
+  File "/home/jo/micromamba/envs/csdms_env/lib/python3.12/site-packages/matplotlib/animation.py", line 1417, in __init__
+    super().__init__(fig, event_source=event_source, *args, **kwargs)
+  File "/home/jo/micromamba/envs/csdms_env/lib/python3.12/site-packages/matplotlib/animation.py", line 888, in __init__
+    self._setup_blit()
+  File "/home/jo/micromamba/envs/csdms_env/lib/python3.12/site-packages/matplotlib/animation.py", line 1216, in _setup_blit
+    self._init_draw()
+  File "/home/jo/micromamba/envs/csdms_env/lib/python3.12/site-packages/matplotlib/animation.py", line 1499, in _init_draw
+    artist.set_visible(False)
+    ^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'set_visible'
+
+#+end_src
+* Gemini 3.5 Flash
+** Response
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: ai-response
+:END:
+Here is a complete, self-contained Python script using the Landlab framework to run a $50 \times 50$ landscape evolution model. It couples stream power (fluvial incision) with linear diffusion (hillslope creep) and uses Matplotlib to animate the landscape's evolution over time.
+*** Prerequisites
+You will need landlab, numpy, and matplotlib installed. If you don't have them, you can install them via pip:
+#+begin_src bash
+pip install landlab numpy matplotlib
+#+end_src
+*** The Script
+This script initializes a flat grid with a tiny amount of random noise (to give the rivers a place to start), uplifts the landscape continuously, and forces the bottom edge to act as an open boundary (outlet) where water and sediment can escape.
+#+begin_src python :tangle spd_benchmark_gemini-3.5-flash.py
+import matplotlib.animation as animation
+import matplotlib.pyplot as plt
+import numpy as np
+from landlab import RasterModelGrid
+from landlab.components import FlowAccumulator, LinearDiffuser, StreamPowerEroder
+
+# ==========================================
+# 1. Setup Grid and Parameters
+# ==========================================
+num_rows = 50
+num_cols = 50
+dx = 10.0  # Grid spacing in meters
+
+grid = RasterModelGrid((num_rows, num_cols), xy_spacing=dx)
+
+# Create the elevation field and add random noise to initiate drainage
+z = grid.add_zeros("topographic__elevation", at="node")
+np.random.seed(42)
+z += np.random.rand(grid.number_of_nodes) * 0.1
+
+# Set boundary conditions: Bottom edge open, others closed
+grid.set_closed_boundaries_at_grid_edges(
+    right_is_closed=True,
+    top_is_closed=True,
+    left_is_closed=True,
+    bottom_is_closed=False,
+)
+
+# Time parameters
+dt = 100.0  # Timestep in years
+total_steps = 200  # Number of frames in animation
+uplift_rate = 0.001  # Uplift rate in m/yr
+
+# Component parameters
+K_sp = 0.001  # Stream power erodibility coefficient
+m_sp = 0.5  # Area exponent
+n_sp = 1.0  # Slope exponent
+D = 0.01  # Hillslope diffusivity (m^2/yr)
+
+# ==========================================
+# 2. Initialize Landlab Components
+# ==========================================
+fa = FlowAccumulator(grid, surface="topographic__elevation", flow_director="D8")
+sp = StreamPowerEroder(grid, K_sp=K_sp, m_sp=m_sp, n_sp=n_sp)
+ld = LinearDiffuser(grid, linear_diffusivity=D)
+
+# ==========================================
+# 3. Setup Animation Plotting
+# ==========================================
+fig, ax = plt.subplots(figsize=(8, 6))
+
+# Reshape elevation for 2D plotting
+z_matrix = z.reshape((num_rows, num_cols))
+
+# Initial plot setup
+im = ax.imshow(
+    z_matrix,
+    cmap="terrain",
+    extent=[0, num_cols * dx, 0, num_rows * dx],
+    origin="lower",
+)
+fig.colorbar(im, ax=ax, label="Elevation (m)")
+title = ax.set_title("Landscape Evolution: Year 0")
+ax.set_xlabel("X Distance (m)")
+ax.set_ylabel("Y Distance (m)")
+
+
+# ==========================================
+# 4. Animation Update Function
+# ==========================================
+def update_landscape(frame):
+    # 1. Apply tectonic uplift to core (interior) nodes
+    z[grid.core_nodes] += uplift_rate * dt
+
+    # 2. Route flow across the landscape
+    fa.run_one_step()
+
+    # 3. Fluvial incision (Stream Power)
+    sp.run_one_step(dt)
+
+    # 4. Hillslope creep (Diffusion)
+    ld.run_one_step(dt)
+
+    # Update visual data
+    z_matrix = z.reshape((num_rows, num_cols))
+    im.set_data(z_matrix)
+    im.set_clim(vmin=z_matrix.min(), vmax=z_matrix.max())
+    title.set_text(f"Landscape Evolution: Year {int((frame + 1) * dt)}")
+
+    return [im, title]
+
+
+# ==========================================
+# 5. Run and Save Animation
+# ==========================================
+ani = animation.FuncAnimation(
+    fig,
+    update_landscape,
+    frames=total_steps,
+    interval=50,  # Delay between frames in ms
+    blit=False,
+)
+
+# To view live while running, uncomment the line below:
+# plt.show()
+
+# Save the animation as an MP4 file (requires ffmpeg)
+output_filename = "landscape_evolution.mp4"
+print(f"Running simulation and saving to {output_filename}...")
+ani.save(output_filename, writer="ffmpeg", fps=20)
+print("Done!")
+#+end_src
+*** Key Mechanics of this Script
+- Boundary Conditions :: By setting bottom_is_closed=False, the bottom row functions as a base-level boundary. Water and sediment empty out here, forcing dendritic channel networks to carve upward into the grid from this side.
+- Component Coupling  :: In every loop iteration (update_landscape), the script routes water (FlowAccumulator), cuts valleys via water flow (StreamPowerEroder), and smooths steep ridges via gravity/soil creep (LinearDiffuser).
+- Ffmpeg Requirement :: To save the animation as an .mp4, your machine needs ffmpeg installed. If you don't have it, you can change the extension to "landscape_evolution.gif" and swap the writer to writer="pillow".
+** Result
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: my-comment
+:END:
+The script runs, generates a nice simple landscape evolution animation
+@@html:<video controls src="gemini-3-5-flash_landscape_evolution.mp4"></video>@@
+* Claude Haiku 4.5
+** Response
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: ai-response
+:END:
+I'll create a Python script that runs a stream power diffusion model in LandLab and generates an animation of the landscape evolution.
+[Editors note: This was generated as a standalone file to download]
+*** ~spd_animation.py~
+#+begin_src python :tangle spd_benchmark_claude-haiku-4.5.py
+#!/usr/bin/env python3
+"""
+Stream Power + Diffusion (SPD) landscape evolution model in LandLab.
+Runs a 50x50 grid, evolves the topography, and generates an animation.
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from matplotlib.colors import LightSource
+from landlab import RasterModelGrid
+from landlab.components import FlowRouter, StreamPowerEroder, LinearDiffuser
+from landlab.io.netcdf import write_netcdf
+
+
+def run_spd_model(
+    grid_size=50,
+    n_steps=500,
+    dt=100,
+    k_sp=1e-4,  # Stream power erodibility
+    k_diff=0.01,  # Diffusivity coefficient
+    m=0.5,  # Stream power slope exponent
+    n=1.0,  # Stream power discharge exponent
+):
+    """
+    Run SPD landscape evolution model.
+    
+    Parameters
+    ----------
+    grid_size : int
+        Grid dimensions (grid_size x grid_size)
+    n_steps : int
+        Number of model iterations
+    dt : float
+        Time step in years
+    k_sp : float
+        Stream power erodibility coefficient
+    k_diff : float
+        Hillslope diffusivity
+    m : float
+        Stream power slope exponent
+    n : float
+        Stream power discharge exponent
+    
+    Returns
+    -------
+    grid : RasterModelGrid
+        Final model grid
+    elevation_history : list
+        Elevation arrays at each saved timestep
+    time_steps : list
+        Corresponding model times (years)
+    """
+    
+    # Create grid
+    grid = RasterModelGrid((grid_size, grid_size), xy_spacing=50.0)
+    
+    # Add elevation field (initial condition: gentle noise on a slope)
+    np.random.seed(42)
+    x, y = grid.x_of_node, grid.y_of_node
+    base_elev = 1000 + 0.001 * y  # Gentle slope towards north
+    noise = np.random.normal(0, 5, grid.number_of_nodes)
+    elevation = base_elev + noise
+    grid.add_field("topographic__elevation", elevation, at="node")
+    
+    # Set boundary conditions (fixed elevation at edges)
+    grid.set_watershed_boundary_condition_outlet_id(
+        0, grid.nodes[0, 0], -9999
+    )
+    
+    # Initialize components
+    flow_router = FlowRouter(grid)
+    sp_eroder = StreamPowerEroder(grid, K=k_sp, m=m, n=n, threshold_sp=0)
+    diffuser = LinearDiffuser(grid, linear_diffusivity=k_diff)
+    
+    # Storage for animation
+    elevation_history = []
+    time_steps = []
+    save_interval = max(1, n_steps // 50)  # Save ~50 frames
+    
+    current_time = 0
+    
+    print(f"Running {n_steps} steps on a {grid_size}x{grid_size} grid...")
+    
+    for step in range(n_steps):
+        # Route flow
+        flow_router.run_one_step()
+        
+        # Erode with stream power
+        sp_eroder.run_one_step(dt)
+        
+        # Diffuse hillslopes
+        diffuser.run_one_step(dt)
+        
+        current_time += dt
+        
+        # Save frame for animation
+        if step % save_interval == 0:
+            elevation_history.append(grid["topographic__elevation"].copy())
+            time_steps.append(current_time)
+        
+        if (step + 1) % 50 == 0:
+            print(f"  Step {step + 1}/{n_steps} (t={current_time/1000:.1f} ky)")
+    
+    print(f"Model complete. Final time: {current_time/1000:.1f} ky")
+    return grid, elevation_history, time_steps
+
+
+def create_animation(elevation_history, time_steps, output_file="spd_evolution.mp4"):
+    """
+    Create and save animation of landscape evolution.
+    
+    Parameters
+    ----------
+    elevation_history : list
+        List of elevation arrays
+    time_steps : list
+        List of corresponding times
+    output_file : str
+        Output video filename
+    """
+    
+    fig, ax = plt.subplots(figsize=(10, 9))
+    
+    # Set up color limits for consistent scaling
+    vmin = min(arr.min() for arr in elevation_history)
+    vmax = max(arr.max() for arr in elevation_history)
+    
+    # Reshape for 2D visualization
+    grid_size = int(np.sqrt(len(elevation_history[0])))
+    
+    im = None
+    
+    def update(frame):
+        nonlocal im
+        
+        # Reshape elevation to 2D grid
+        elev_2d = elevation_history[frame].reshape((grid_size, grid_size))
+        
+        # Clear previous image
+        if im is not None:
+            im.remove()
+        
+        # Plot with hillshade for better visualization
+        ls = LightSource(azdeg=315, altdeg=45)
+        hillshade = ls.hillshade(elev_2d, vert_exag=2)
+        
+        im = ax.imshow(
+            hillshade,
+            cmap="gray",
+            origin="lower",
+            extent=[0, grid_size * 50, 0, grid_size * 50],
+        )
+        
+        # Add elevation contours
+        contours = ax.contour(
+            elev_2d,
+            levels=10,
+            colors="white",
+            alpha=0.3,
+            extent=[0, grid_size * 50, 0, grid_size * 50],
+            linewidths=0.5,
+        )
+        
+        time_ka = time_steps[frame] / 1000
+        ax.set_title(
+            f"SPD Landscape Evolution\nTime: {time_ka:.1f} ka",
+            fontsize=14,
+            fontweight="bold",
+        )
+        ax.set_xlabel("Distance (m)")
+        ax.set_ylabel("Distance (m)")
+        
+        return [im]
+    
+    anim = animation.FuncAnimation(
+        fig,
+        update,
+        frames=len(elevation_history),
+        interval=50,
+        blit=True,
+        repeat=True,
+    )
+    
+    print(f"Saving animation to {output_file}...")
+    anim.save(output_file, writer="ffmpeg", dpi=100)
+    print(f"Animation saved!")
+    
+    plt.close(fig)
+
+
+def plot_summary(grid, elevation_history):
+    """Plot initial and final topography."""
+    
+    grid_size = int(np.sqrt(len(elevation_history[0])))
+    
+    fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+    
+    elev_init = elevation_history[0].reshape((grid_size, grid_size))
+    elev_final = elevation_history[-1].reshape((grid_size, grid_size))
+    
+    im0 = axes[0].imshow(elev_init, cmap="viridis", origin="lower")
+    axes[0].set_title("Initial Topography", fontweight="bold")
+    axes[0].set_xlabel("Grid index")
+    axes[0].set_ylabel("Grid index")
+    plt.colorbar(im0, ax=axes[0], label="Elevation (m)")
+    
+    im1 = axes[1].imshow(elev_final, cmap="viridis", origin="lower")
+    axes[1].set_title("Final Topography", fontweight="bold")
+    axes[1].set_xlabel("Grid index")
+    axes[1].set_ylabel("Grid index")
+    plt.colorbar(im1, ax=axes[1], label="Elevation (m)")
+    
+    # Add relief and slope info
+    relief_init = elev_init.max() - elev_init.min()
+    relief_final = elev_final.max() - elev_final.min()
+    
+    fig.text(
+        0.5,
+        0.02,
+        f"Initial relief: {relief_init:.1f} m | Final relief: {relief_final:.1f} m",
+        ha="center",
+        fontsize=11,
+    )
+    
+    plt.tight_layout()
+    plt.subplots_adjust(bottom=0.08)
+    plt.savefig("spd_summary.png", dpi=150, bbox_inches="tight")
+    print("Summary figure saved to spd_summary.png")
+    plt.close(fig)
+
+
+if __name__ == "__main__":
+    # Run model
+    grid, elev_hist, times = run_spd_model(
+        grid_size=50,
+        n_steps=500,
+        dt=100,
+        k_sp=1e-4,
+        k_diff=0.01,
+        m=0.5,
+        n=1.0,
+    )
+    
+    # Create animation
+    create_animation(elev_hist, times, "spd_evolution.mp4")
+    
+    # Plot summary
+    plot_summary(grid, elev_hist)
+    
+    print("\nDone! Check spd_evolution.mp4 and spd_summary.png")
+#+end_src
+
+I've created a complete SPD landscape evolution script for you. Here's what it does:
+*Key features:*
+- Runs a 50×50 grid with stream power erosion + hillslope diffusion
+- 500 timesteps (100-year increments, easily tunable)
+- Saves ~50 frames for smooth animation
+- Generates an MP4 with hillshade visualization and elevation contours
+- Creates a summary PNG comparing initial vs. final topography
+
+*To run it*
+#+begin_src bash
+python spd_animation.py
+#+end_src
+*Requirements:*
+#+begin_src bash
+pip install landlab matplotlib numpy ffmpeg-python
+#+end_src
+The model parameters are customizable in the ~run_spd_model()~ call:
+- ~k_sp=1e-4~ :: Stream power erodibility (higher = more incision)
+- ~k_diff=0.001 :: Hillslope diffusivity (higher = more smoothing)
+- ~m~ and ~n~ ::  Exponents in the stream power law
+- ~dt~ :: Time step (100 years per step works well)
+- ~n_steps~ :: Total iterations
+
+  The animation visualizes landscape evolution with hillshading (standard geomorphology style), contours for elevation structure, and a time counter in ka. The summary figure shows relief change over the model run.
+** Result
+:PROPERTIES:
+:HTML_CONTAINER_CLASS: my-comment
+:END:
+Script did not run as written, it uses a hallucinated ~FlowRouter~ component, instead of ~FlowAccumulator~.
+#+begin_src python
+Traceback (most recent call last):
+  File "/home/jo/cub/csdms/genai_benchmarkets/spd_benchmark_claude-haiku-4.5.py", line 12, in <module>
+    from landlab.components import FlowRouter, StreamPowerEroder, LinearDiffuser
+ImportError: cannot import name 'FlowRouter' from 'landlab.components' (/home/jo/micromamba/envs/csdms_env/lib/python3.12/site-packages/landlab/components/__init__.py)
+#+end_src
+  

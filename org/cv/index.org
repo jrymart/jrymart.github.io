@@ -1,0 +1,11 @@
+#+title: CV
+
+* Education
+
+- *PhD, Geology (in progress)* - University of Colorado, Boulder
+- *MS, Mathematics (2020)* - University of Vermont
+- *BA, Geology (2016)* - Oberlin College
+
+* Download
+
+@@html:<a href="/assets/pdf/jmartin_cv/pdf">Full CV (PDF)</a>@@

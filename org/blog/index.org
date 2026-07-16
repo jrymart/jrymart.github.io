@@ -1,0 +1,5 @@
+#+TITLE: Blog
+
+- [[file:2024-03-27-small-over-tiny.org][Small Projects over Tiny]]
+- [[file:2023-08-29-microteaching.org][Microteaching about Functions]]
+- [[file:2023-05-17-rss-zotero.org][Staying on top of research with RSS and Zotero]]
