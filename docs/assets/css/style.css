@@ -231,3 +231,11 @@ nav a {
   border: none;
   width: 100%;
 }
+details summary {
+  cursor: pointer;
+  font-weight: 500;
+  padding: 0.5em 0;
+}
+details summary:hover {
+  color: #555;
+}

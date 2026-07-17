@@ -8,6 +8,10 @@
 <title>Spd Animation</title>
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="/assets/css/style.css" type="text/css"/>
+                <link rel="icon" type="image/svg+xml" href="/assets/favicons/favicon.svg"/>
+                <link rel="alternate icon" href="/assets/favicons/favicon.ico"/>
+                <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png"/>
+                <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png"/>
 <link rel="stylesheet" href="/assets/css/benchmark.css" type="text/css" />
 <script>
   window.MathJax = {
@@ -57,21 +61,21 @@
 <p>
 This is a GenAI benchmark to help make the community aware of current large language model capabilities.  In this benchmark, we test the ability of a model to write a script to create and run a streampower-diffusion landlab model, and save the results as an animation.
 </p>
-<div id="outline-container-org6b68dbe" class="outline-2 prompt">
-<h2 id="org6b68dbe">Prompt</h2>
-<div class="outline-text-2" id="text-org6b68dbe">
+<div id="outline-container-org5793815" class="outline-2 prompt">
+<h2 id="org5793815">Prompt</h2>
+<div class="outline-text-2" id="text-org5793815">
 <p>
 Please make me a script that runs a 50x50 streampower diffusion model in landlab and generate an animation of a landscape evolving.  
 </p>
 </div>
 </div>
-<div id="outline-container-org57657d2" class="outline-2">
-<h2 id="org57657d2">Gemini 3.1 Flash Lite</h2>
-<div class="outline-text-2" id="text-org57657d2">
+<div id="outline-container-orge9de0f3" class="outline-2">
+<h2 id="orge9de0f3">Gemini 3.1 Flash Lite</h2>
+<div class="outline-text-2" id="text-orge9de0f3">
 </div>
-<div id="outline-container-org756647b" class="outline-3 ai-response">
-<h3 id="org756647b">Response</h3>
-<div class="outline-text-3" id="text-org756647b">
+<div id="outline-container-org93f4d4a" class="outline-3 ai-response">
+<h3 id="org93f4d4a">Response</h3>
+<div class="outline-text-3" id="text-org93f4d4a">
 <p>
 To create a 50x50 landscape evolution model in Landlab, we will combine the <b>FlowAccumulator</b> (to route water), <b>FastscapeEroder</b> (to perform stream power incision), and <b>LinearDiffuser</b> (to smooth the landscape).
 </p>
@@ -80,9 +84,9 @@ To create a 50x50 landscape evolution model in Landlab, we will combine the <b>F
 The script below uses matplotlib.animation to save the output as a .gif.
 </p>
 </div>
-<div id="outline-container-org2323715" class="outline-4">
-<h4 id="org2323715">Prerequisites</h4>
-<div class="outline-text-4" id="text-org2323715">
+<div id="outline-container-org6979b58" class="outline-4">
+<h4 id="org6979b58">Prerequisites</h4>
+<div class="outline-text-4" id="text-org6979b58">
 <p>
 Ensure you have the necessary libraries installed:
 </p>
@@ -92,9 +96,9 @@ Ensure you have the necessary libraries installed:
 </div>
 </div>
 </div>
-<div id="outline-container-org9b26b27" class="outline-4">
-<h4 id="org9b26b27">Landlab Evolution Script</h4>
-<div class="outline-text-4" id="text-org9b26b27">
+<div id="outline-container-org8f83fe9" class="outline-4">
+<h4 id="org8f83fe9">Landlab Evolution Script</h4>
+<div class="outline-text-4" id="text-org8f83fe9">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">import</span> numpy <span style="color: #0000FF; font-weight: bold;">as</span> np
 <span style="color: #0000FF; font-weight: bold;">import</span> matplotlib.pyplot <span style="color: #0000FF; font-weight: bold;">as</span> plt
@@ -151,9 +155,9 @@ plt.show()
 </div>
 </div>
 </div>
-<div id="outline-container-orgfa235a6" class="outline-4">
-<h4 id="orgfa235a6">Key Components Explained</h4>
-<div class="outline-text-4" id="text-orgfa235a6">
+<div id="outline-container-org5c851b9" class="outline-4">
+<h4 id="org5c851b9">Key Components Explained</h4>
+<div class="outline-text-4" id="text-org5c851b9">
 <dl class="org-dl">
 <dt>RasterModelGrid((50, 50), &#x2026;)</dt><dd>Defines your simulation grid dimensions.</dd>
 <dt>FlowAccumulator</dt><dd>Essential for any fluvial model; it calculates how water flows across the grid nodes.</dd>
@@ -170,9 +174,9 @@ Would you like to adjust the erosion parameters to create a more incised or more
 </div>
 </div>
 </div>
-<div id="outline-container-orgc5fa452" class="outline-3 my-comment">
-<h3 id="orgc5fa452">Result</h3>
-<div class="outline-text-3" id="text-orgc5fa452">
+<div id="outline-container-org56825fb" class="outline-3 my-comment">
+<h3 id="org56825fb">Result</h3>
+<div class="outline-text-3" id="text-org56825fb">
 <p>
 Code did not run as written, with the following error trace.  I&rsquo;m not sure if it&rsquo;s because it&rsquo;s using matplotlib.animation incorrectly or if it&rsquo;s a different bug.
 </p>
@@ -199,20 +203,20 @@ Code did not run as written, with the following error trace.  I&rsquo;m not sure
 </div>
 </div>
 </div>
-<div id="outline-container-orgc548a09" class="outline-2">
-<h2 id="orgc548a09">Gemini 3.5 Flash</h2>
-<div class="outline-text-2" id="text-orgc548a09">
+<div id="outline-container-orgddec0e8" class="outline-2">
+<h2 id="orgddec0e8">Gemini 3.5 Flash</h2>
+<div class="outline-text-2" id="text-orgddec0e8">
 </div>
-<div id="outline-container-org71914b9" class="outline-3 ai-response">
-<h3 id="org71914b9">Response</h3>
-<div class="outline-text-3" id="text-org71914b9">
+<div id="outline-container-org6a8c671" class="outline-3 ai-response">
+<h3 id="org6a8c671">Response</h3>
+<div class="outline-text-3" id="text-org6a8c671">
 <p>
 Here is a complete, self-contained Python script using the Landlab framework to run a \(50 \times 50\) landscape evolution model. It couples stream power (fluvial incision) with linear diffusion (hillslope creep) and uses Matplotlib to animate the landscape&rsquo;s evolution over time.
 </p>
 </div>
-<div id="outline-container-orge0d03ed" class="outline-4">
-<h4 id="orge0d03ed">Prerequisites</h4>
-<div class="outline-text-4" id="text-orge0d03ed">
+<div id="outline-container-org08e20bd" class="outline-4">
+<h4 id="org08e20bd">Prerequisites</h4>
+<div class="outline-text-4" id="text-org08e20bd">
 <p>
 You will need landlab, numpy, and matplotlib installed. If you don&rsquo;t have them, you can install them via pip:
 </p>
@@ -222,9 +226,9 @@ You will need landlab, numpy, and matplotlib installed. If you don&rsquo;t have 
 </div>
 </div>
 </div>
-<div id="outline-container-org28ead61" class="outline-4">
-<h4 id="org28ead61">The Script</h4>
-<div class="outline-text-4" id="text-org28ead61">
+<div id="outline-container-org94dafe3" class="outline-4">
+<h4 id="org94dafe3">The Script</h4>
+<div class="outline-text-4" id="text-org94dafe3">
 <p>
 This script initializes a flat grid with a tiny amount of random noise (to give the rivers a place to start), uplifts the landscape continuously, and forces the bottom edge to act as an open boundary (outlet) where water and sediment can escape.
 </p>
@@ -344,9 +348,9 @@ ani.save(output_filename, writer=<span style="color: #008000;">"ffmpeg"</span>, 
 </div>
 </div>
 </div>
-<div id="outline-container-orga7b1804" class="outline-4">
-<h4 id="orga7b1804">Key Mechanics of this Script</h4>
-<div class="outline-text-4" id="text-orga7b1804">
+<div id="outline-container-orgdc0de5e" class="outline-4">
+<h4 id="orgdc0de5e">Key Mechanics of this Script</h4>
+<div class="outline-text-4" id="text-orgdc0de5e">
 <dl class="org-dl">
 <dt>Boundary Conditions</dt><dd>By setting bottom<sub>is</sub><sub>closed</sub>=False, the bottom row functions as a base-level boundary. Water and sediment empty out here, forcing dendritic channel networks to carve upward into the grid from this side.</dd>
 <dt>Component Coupling </dt><dd>In every loop iteration (update<sub>landscape</sub>), the script routes water (FlowAccumulator), cuts valleys via water flow (StreamPowerEroder), and smooths steep ridges via gravity/soil creep (LinearDiffuser).</dd>
@@ -355,9 +359,9 @@ ani.save(output_filename, writer=<span style="color: #008000;">"ffmpeg"</span>, 
 </div>
 </div>
 </div>
-<div id="outline-container-org433216c" class="outline-3 my-comment">
-<h3 id="org433216c">Result</h3>
-<div class="outline-text-3" id="text-org433216c">
+<div id="outline-container-org1b1709a" class="outline-3 my-comment">
+<h3 id="org1b1709a">Result</h3>
+<div class="outline-text-3" id="text-org1b1709a">
 <p>
 The script runs, generates a nice simple landscape evolution animation
 <video controls src="gemini-3-5-flash_landscape_evolution.mp4"></video>
@@ -365,21 +369,21 @@ The script runs, generates a nice simple landscape evolution animation
 </div>
 </div>
 </div>
-<div id="outline-container-orgd1b221d" class="outline-2">
-<h2 id="orgd1b221d">Claude Haiku 4.5</h2>
-<div class="outline-text-2" id="text-orgd1b221d">
+<div id="outline-container-org264b7f7" class="outline-2">
+<h2 id="org264b7f7">Claude Haiku 4.5</h2>
+<div class="outline-text-2" id="text-org264b7f7">
 </div>
-<div id="outline-container-orgcefcdcb" class="outline-3 ai-response">
-<h3 id="orgcefcdcb">Response</h3>
-<div class="outline-text-3" id="text-orgcefcdcb">
+<div id="outline-container-org07107a4" class="outline-3 ai-response">
+<h3 id="org07107a4">Response</h3>
+<div class="outline-text-3" id="text-org07107a4">
 <p>
 I&rsquo;ll create a Python script that runs a stream power diffusion model in LandLab and generates an animation of the landscape evolution.
 [Editors note: This was generated as a standalone file to download]
 </p>
 </div>
-<div id="outline-container-org7a2e9cd" class="outline-4">
-<h4 id="org7a2e9cd"><code>spd_animation.py</code></h4>
-<div class="outline-text-4" id="text-org7a2e9cd">
+<div id="outline-container-orga68309c" class="outline-4">
+<h4 id="orga68309c"><code>spd_animation.py</code></h4>
+<div class="outline-text-4" id="text-orga68309c">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">!/usr/bin/env python3
 </span><span style="color: #036A07;">"""
@@ -680,9 +684,9 @@ The animation visualizes landscape evolution with hillshading (standard geomorph
 </div>
 </div>
 </div>
-<div id="outline-container-org7dd4d24" class="outline-3 my-comment">
-<h3 id="org7dd4d24">Result</h3>
-<div class="outline-text-3" id="text-org7dd4d24">
+<div id="outline-container-org162950e" class="outline-3 my-comment">
+<h3 id="org162950e">Result</h3>
+<div class="outline-text-3" id="text-org162950e">
 <p>
 Script did not run as written, it uses a hallucinated <code>FlowRouter</code> component, instead of <code>FlowAccumulator</code>.
 </p>

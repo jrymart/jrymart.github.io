@@ -1,4 +1,5 @@
 #+title: Spd Animation
+#+DATE: 2026-05-15
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" href="/assets/css/benchmark.css" type="text/css" />
 
 This is a GenAI benchmark to help make the community aware of current large language model capabilities.  In this benchmark, we test the ability of a model to write a script to create and run a streampower-diffusion landlab model, and save the results as an animation.

@@ -1,4 +1,4 @@
 #+TITLE: Projects
 
-- [[file:spd_animation.org][Spd Animation]]
 - [[file:neural-spd-inversion.org][neural-spd-inversion]]
+- [[file:spd_animation.org][Spd Animation]]

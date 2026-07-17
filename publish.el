@@ -21,7 +21,11 @@
     :with-creator nil
     :with-date nil
     :time-stamp-file nil
-    :html-head "<link rel=\"stylesheet\" href=\"/assets/css/style.css\" type=\"text/css\"/>"
+    :html-head "<link rel=\"stylesheet\" href=\"/assets/css/style.css\" type=\"text/css\"/>
+                <link rel=\"icon\" type=\"image/svg+xml\" href=\"/assets/favicons/favicon.svg\"/>
+                <link rel=\"alternate icon\" href=\"/assets/favicons/favicon.ico\"/>
+                <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/assets/favicons/favicon-32x32.png\"/>
+                <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/assets/favicons/favicon-16x16.png\"/>"
     :html-preamble ,site-nav
     :html-postamble nil
     :html-head-include-default-style nil
@@ -37,7 +41,11 @@
     :with-creator nil
     :with-date t
     :time-stamp-file nil
-    :html-head "<link rel=\"stylesheet\" href=\"/assets/css/style.css\" type=\"text/css\"/>"
+    :html-head "<link rel=\"stylesheet\" href=\"/assets/css/style.css\" type=\"text/css\"/>
+                <link rel=\"icon\" type=\"image/svg+xml\" href=\"/assets/favicons/favicon.svg\"/>
+                <link rel=\"alternate icon\" href=\"/assets/favicons/favicon.ico\"/>
+                <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/assets/favicons/favicon-32x32.png\"/>
+                <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/assets/favicons/favicon-16x16.png\"/>"
     :html-preamble ,site-nav
     :html-postamble nil
     :html-head-include-default-style nil
@@ -73,7 +81,7 @@
 
         ("site-assets"
          :base-directory ,(expand-file-name "assets" site-root)
-         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|webp\\|mp4"
+         :base-extension "css\\|js\\|png\\|svg\\|jpg\\|gif\\|pdf\\|webp\\|mp4\\|html"
          :recursive t
          :publishing-directory ,(expand-file-name "docs/assets" site-root)
          :publishing-function org-publish-attachment)
