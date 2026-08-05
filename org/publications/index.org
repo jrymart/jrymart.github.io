@@ -2,7 +2,7 @@
 
 * Preprints
 
-- *Martin, J. R.* & Tucker, G. E. (2026). [[https://doi.org/10.22541/essoar.15004831/v1][Can Neural Networks Think Like Geomorphologists?]] /ESSOAr preprint/.
+- *Martin, J. R.* & Tucker, G. E. (2026). [[https://doi.org/10.22541/essoar.15004831/v1][Can Neural Networks Think Like Geomorphologists?]] /Geophysical Research Letters/.
 
 * Peer-Reviewed
 
