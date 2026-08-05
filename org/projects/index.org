@@ -1,4 +1,4 @@
 #+TITLE: Projects
 
-- [[file:neural-spd-inversion.org][neural-spd-inversion]]
+- [[file:neural-spd-inversion.org][Can Neural Networks Think Like Geomorphologists?]]
 - [[file:spd_animation.org][Spd Animation]]

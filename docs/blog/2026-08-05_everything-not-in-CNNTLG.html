@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Everything /not/ in "Can Neural Networks Think Like Geomorphologists"</title>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/assets/css/style.css" type="text/css"/>
+                <link rel="icon" type="image/svg+xml" href="/assets/favicons/favicon.svg"/>
+                <link rel="alternate icon" href="/assets/favicons/favicon.ico"/>
+                <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png"/>
+                <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png"/>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<nav>
+<a href="/">Home</a>
+<a href="/blog/">Blog</a>
+<a href="/projects/">Projects</a>
+<a href="/publications/">Publications</a>
+<a href="/cv/">CV</a>
+</nav>
+</div>
+<div id="content" class="content">
+<h1 class="title">Everything <i>not</i> in &ldquo;Can Neural Networks Think Like Geomorphologists&rdquo;</h1>
+<p>
+I recently finished up a paper <a href="https://doi.org/10.22541/essoar.15004831/v1">&ldquo;Can Neural Networks Think Like Geomorphologists&rdquo;</a> which should be being published shortly (is it bad form to say where?).  The preprint is linked above, and I&rsquo;ll have a more casual write up on the webpage soon.  But there&rsquo;s a lot that didn&rsquo;t make it into the paper.  Little dead ends that didn&rsquo;t go anywhere, things that were helpful to guide my thinking but didn&rsquo;t have a place in the manuscript, and some stubs that have potential but I didn&rsquo;t fully develop.  They couldn&rsquo;t go in the paper without making it a mess, but I thought it would be good preserve them somewhere, hence this blog post.  I&rsquo;m not going to go over the project context, so take a look at the manuscript or the project page.
+</p>
+<div id="outline-container-org25b9285" class="outline-2">
+<h2 id="org25b9285">Péclet Numbers</h2>
+<div class="outline-text-2" id="text-org25b9285">
+<p>
+This paper is about understanding an advective diffusive system by the ratio of diffusive transport (D) to advective transport (K).  This is often (in both the geomorphology literature and beyond) with a Péclet number - a non dimensionalized ratio of advective to diffusive transport.  However, in my paper I use \(D/K\), which has not been non dimensionalized, and is the inverse ratio.  It didn&rsquo;t start out this way.  The very first neural networks I trained were for \(K/D\) with the understanding I would nondimensionalize it later.  I was eager to get the project off the ground, and wanted to put off choosing the characteristic scales necessary for nondimensionalization.  Eventually I reviewed a few approaches for determining length scales, chose one, and trained a bunch of neural networks to infer Péclet instead of raw \(K/D\).  The network performed just as well (which makes sense since I used uniform characteristic scales for all my landscapes).  Then, after some urging by others, I tried the neural network on some real landscapes.   I realized that my choices of scale were perhaps sensible for my modeled input, but not for these real landscapes.  The real data was reported as \(D/K\) values <a href="#citeproc_bib_item_2">Perron et al. 2009</a> so I re-trained my networks to infer \(D/K\).  The real landscapes didn&rsquo;t work, so they were discarded.  When preparing the work for publication, we decided that nondimensionalizing the parameters didn&rsquo;t really help us understand anything, and required decisions about scales that were hard to make, so we stuck with \(D/K\).  In this blog post I&rsquo;m bringing back figures from earlier stages of this project that were generated when we were using \(K/D\) and Péclet, so just understand that there was some drift in presentation, but it all means basically the same thing.
+</p>
+</div>
+</div>
+<div id="outline-container-orgb4471cd" class="outline-2">
+<h2 id="orgb4471cd">Interpretability Techniques</h2>
+<div class="outline-text-2" id="text-orgb4471cd">
+<p>
+The paper is really an interpretability paper.  I built this neural network to see how we could take it apart as geomorphologists, and if it might be possible to have neural networks teach us geomorphology, not just solve problems (by which I mean classify or predict something with really high performance).  This was actually the source of a bit of frustration when I would present this work; people would inevitability ask something like &ldquo;oh, can we use this to get \(D/K\) values from real landscapes?&rdquo;, and you couldn&rsquo;t because the models I used to train that were too uniform, in part because I though everyone would scoff at a neural network trained on models being used to say anything about real data.  Now that I realize the field isn&rsquo;t hostile to that, it&rsquo;s something we&rsquo;re working on to some extent, but we&rsquo;ll see where that goes.  Anyway the point of the study was <i>not</i> &ldquo;lets build a \(D/K\) predictor&rdquo;, it was &ldquo;is it crazy to try to use CNN&rsquo;s to find new geomorphically meaningful spatial patterns?&rdquo;.
+</p>
+
+<p>
+I was really excited about convolutional neural networks because of all the interpretability techniques that the computer vision field has come up with, and so my idea was to just try them on my network.
+</p>
+</div>
+<div id="outline-container-orgc066cb5" class="outline-3">
+<h3 id="orgc066cb5">Activation Maximization</h3>
+<div class="outline-text-3" id="text-orgc066cb5">
+<p>
+I started with activation maximization, which briefly is a way of creating an input that maximizes the output of a specific neuron in the neural network.  If the neuron outputs a value between 0 and 1, the activation maximization image gets that neuron very close to 1.  Our network has convolutions, which have 2D outputs, so think of the output we&rsquo;re targeting as close to 1 everywhere.  I generated these for the neurons in my network (you can see it for every neuron <a href="https://jrymart.github.io/agu2024/">here</a>), but they mostly look like this:
+</p>
+<p width="200" alt="&quot;description&quot;" loading="&quot;lazy&quot;">
+<img src="/assets/img/cnntlg/max_6_16.svg" alt="&quot;description&quot;" class="org-svg" width="200" loading="&quot;lazy&quot;" />
+This  is pretty noisy but maybe you can convince yourself that there is some structure, some sort of evenly spaced wave type thing.  Well that&rsquo;s <i>something</i> since we know that \(D/K\) (what this network is inferring) is related to valley spacing.  Could this be proof of a valley spacing relationship?  This was promising but not really enough, there wasn&rsquo;t any obvious structure, like systematically different orientations or spacing or anything like that.  To try to test that the network was sensitive to valley spacing, I ended up constructing a series of sine inputs, and that made it into the paper.
+</p>
+</div>
+</div>
+<div id="outline-container-orgb97b638" class="outline-3">
+<h3 id="orgb97b638">GradCAM</h3>
+<div class="outline-text-3" id="text-orgb97b638">
+<p>
+GradCAM is another interpretation technique that highlights areas of the input that are important for the output.   I constructed grad cam images for the network as a whole and each convolutional layer, for an example low \(D/K\) (&ldquo;High Peclet&rdquo; in the figure) and high \(D/K\) (&ldquo;Low Peclet&rdquo;) in the figure.
+</p>
+<p width="600" alt="&quot;description&quot;" loading="&quot;lazy&quot;">
+<img src="/assets/img/cnntlg/gradcam.png" alt="&quot;description&quot;" width="600" loading="&quot;lazy&quot;" />
+It&rsquo;s not nothing, but I didn&rsquo;t see anything on here that I could really build towards.  The landscapes are symmetrical so (the third layer) learns to focus on the right side?  Early layers look at finer scale valley features?  Again it&rsquo;s not nothing, but between this and the activation maximization images, it was shaping up to be a very handwavy paper, and I didn&rsquo;t have things I could tie to the geomorphology like I wanted to.  An important thing to note, is that these methods, like a lot of things in computer vision, were developed for networks that are <i>classifying</i> their inputs.  I think you can go a lot further when you can tie these images back to specific classes, and maybe when your inputs are a bit more heterogeneous.  
+</p>
+</div>
+</div>
+<div id="outline-container-org8f51c26" class="outline-3">
+<h3 id="org8f51c26">Ablation and weight visualization</h3>
+<div class="outline-text-3" id="text-org8f51c26">
+<p>
+One thing that was looking really exciting for a while was ablating neurons, and visually inspecting the weights of the most important neurons.  I found some important neurons that looked like they could be doing ridge and face detection.
+</p>
+
+<div id="orge8543b0" class="figure">
+<p><img src="/assets/img/cnntlg/ridge_conv.png" alt="&quot;description&quot;" width="600" loading="&quot;lazy&quot;" />
+</p>
+</div>
+<p width="600" alt="&quot;description&quot;" loading="&quot;lazy&quot;">
+<img src="/assets/img/cnntlg/face_conv.png" alt="&quot;description&quot;" width="600" loading="&quot;lazy&quot;" />
+To test this, I created a version of the neural network where I fixed the first set of convolutions to be explicitly focused on detecting ridges and faces.  The resulting network did OK, but I suspect that it&rsquo;s spite of the ridge and face convolutions, not because of them.
+</p>
+
+<div id="orgbae3eb6" class="figure">
+<p><img src="/assets/img/cnntlg/fixed_result.png" alt="&quot;description&quot;" width="600" loading="&quot;lazy&quot;" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf7f250b" class="outline-3">
+<h3 id="orgf7f250b">Fourier Decomposition</h3>
+<div class="outline-text-3" id="text-orgf7f250b">
+<p>
+Inspired by some other work on landscapes <a href="#citeproc_bib_item_1">Perron et al. 2008</a> I did some Fourier decompositions of the landscape as it got transformed by the neural network.  This yielded some cool plots, but not much to work with it.  I&rsquo;m not convinced that there isn&rsquo;t something there.
+</p>
+</div>
+</div>
+<div id="outline-container-orgff63887" class="outline-3">
+<h3 id="orgff63887">Spatial Scale Ablation Experiments</h3>
+<div class="outline-text-3" id="text-orgff63887">
+<p>
+I created a neural network that had convolutions with different windows running in parallel, and then ablated based on window size to see how that impacted network performance.  I was hoping for something like &ldquo;ablating this window size means that the network loses skill in this range of inputs but not this other range&rdquo;.  Instead it just would totally not perform.  I think this experiment could go somewhere if I designed it a little more thoughtfully.
+</p>
+<style>.csl-entry{text-indent: -1.5em; margin-left: 1.5em;}</style><div class="csl-bib-body">
+  <div class="csl-entry"><a id="citeproc_bib_item_1"></a>Perron, J. Taylor, James W. Kirchner, and William E. Dietrich. 2008. “Spectral signatures of characteristic spatial scales and nonfractal structure in landscapes.” <i>Journal of geophysical research: Earth surface</i>. 113 (F4). <a href="https://doi.org/10.1029/2007JF000866">https://doi.org/10.1029/2007JF000866</a>.</div>
+  <div class="csl-entry"><a id="citeproc_bib_item_2"></a>Perron, J. Taylor, James W. Kirchner, and William E. Dietrich. 2009. “Formation of evenly spaced ridges and valleys.” <i>Nature</i>. 460 (7254): 502–505. Nature Publishing Group. <a href="https://doi.org/10.1038/nature08174">https://doi.org/10.1038/nature08174</a>.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

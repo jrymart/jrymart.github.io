@@ -247,7 +247,7 @@ print("Done!")
 :HTML_CONTAINER_CLASS: my-comment
 :END:
 The script runs, generates a nice simple landscape evolution animation
-@@html:<video controls src="gemini-3-5-flash_landscape_evolution.mp4"></video>@@
+@@html:<video controls src="/assets/video/gemini-3-5-flash_landscape_evolution.mp4"></video>@@
 * Claude Haiku 4.5
 ** Response
 :PROPERTIES:

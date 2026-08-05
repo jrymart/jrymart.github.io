@@ -1,0 +1,266 @@
+/* ==========================================================================
+   cards.css
+   A small, general card system for the org-publish site.
+
+   Two ways to get a card:
+
+   1. On a headline, via a property drawer (what benchmark.css already uses):
+
+        * Some section
+        :PROPERTIES:
+        :HTML_CONTAINER_CLASS: card
+        :END:
+
+   2. On an arbitrary chunk of a page, via an org *special block*.
+      ox-html exports any unknown #+begin_NAME block as <div class="NAME">:
+
+        #+begin_card
+        anything at all
+        #+end_card
+
+      Extra classes go through #+attr_html, and ox-html appends the block
+      name to whatever you pass:
+
+        #+attr_html: :class accent-blue
+        #+begin_card
+        ...
+        #+end_card
+      -> <div class="accent-blue card">
+
+   Everything below is built from one base (.card) plus modifiers, so the
+   benchmark prompt/response/comment colors and a paper header card are the
+   same object wearing different accents.
+   ========================================================================== */
+
+:root {
+  /* surface + ink */
+  --card-bg:        #ffffff;
+  --card-bg-tint:   #f7f8fa;
+  --card-border:    #e4e7ec;
+  --card-ink:       #1f2733;
+  --card-ink-muted: #5b6673;
+
+  /* accents — one hue per role, referenced by the modifiers below */
+  --accent-blue:    #2563eb;
+  --accent-blue-bg: #eff4ff;
+  --accent-slate:   #64748b;
+  --accent-slate-bg:#f7f8fa;
+  --accent-amber:   #d97706;
+  --accent-amber-bg:#fff8e8;
+  --accent-green:   #15803d;
+  --accent-green-bg:#effaf1;
+
+  --card-radius:    10px;
+  --card-pad-y:     1rem;
+  --card-pad-x:     1.25rem;
+  --card-gap:       0.75rem;
+}
+
+/* --- base ---------------------------------------------------------------- */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  padding: var(--card-pad-y) var(--card-pad-x);
+  margin: 1.6em 0;
+  color: var(--card-ink);
+}
+
+/* first/last child margin collapse — otherwise every card gets a fat gap at
+   the top from the leading <p> or <h2>. */
+.card > :first-child { margin-top: 0; }
+.card > :last-child  { margin-bottom: 0; }
+
+/* code blocks inside a tinted card shouldn't inherit the tint */
+.card pre,
+.card .org-src-container { background-color: #fff; }
+
+/* --- modifiers ----------------------------------------------------------- */
+/* Tinted fill + left rule. Combine with .card. */
+.accent-blue  { --card-bg: var(--accent-blue-bg);  --_accent: var(--accent-blue);  }
+.accent-slate { --card-bg: var(--accent-slate-bg); --_accent: var(--accent-slate); }
+.accent-amber { --card-bg: var(--accent-amber-bg); --_accent: var(--accent-amber); }
+.accent-green { --card-bg: var(--accent-green-bg); --_accent: var(--accent-green); }
+
+.accent-blue.card,
+.accent-slate.card,
+.accent-amber.card,
+.accent-green.card {
+  border-color: transparent;
+  border-left: 5px solid var(--_accent);
+}
+
+/* Quieter variant: no fill, just a hairline. Good for a stack of many cards. */
+.card.flat {
+  background: var(--card-bg);
+  box-shadow: none;
+}
+
+/* Slightly lifted variant, for the one card that should read as the header. */
+.card.raised {
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04),
+              0 4px 12px rgba(16, 24, 40, 0.06);
+  border-color: transparent;
+}
+
+/* --- role badge ---------------------------------------------------------- */
+/* Opt in by adding a data-role, so the badge text lives in the org source
+   rather than being hardcoded per class:
+
+     #+attr_html: :class accent-blue :data-role Prompt
+     #+begin_card
+*/
+.card[data-role]::before {
+  content: attr(data-role);
+  display: inline-block;
+  margin-bottom: 0.5em;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--_accent, var(--accent-slate)) 15%, #fff);
+  color: color-mix(in srgb, var(--_accent, var(--accent-slate)) 80%, #000);
+  font: 600 11px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   PAPER / PROJECT HEADER CARD
+   --------------------------------------------------------------------------
+   Org source:
+
+     #+attr_html: :class raised paper-head
+     #+begin_card
+     *Title of the paper goes here*
+
+     Author One, Author Two, Author Three --- /Journal Name/, 2026
+
+     - [[https://doi.org/10.xxxx/yyyy][Paper]]
+     - [[https://github.com/jrymart/repo][Code]]
+     - [[file:../blog/how-i-did-it.org][Blog post]]
+     - [[https://doi.org/10.5281/zenodo.xxxx][Data]]
+     #+end_card
+
+   The plain org list becomes the pill row — no raw HTML needed.
+   ========================================================================== */
+.paper-head {
+  display: flex;
+  background: var(--accent-green-bg);
+  flex-direction: column;
+  gap: var(--card-gap);
+  padding: 1.4rem 1.5rem;
+}
+
+.paper-head > p:first-of-type {          /* title line */
+  font-size: 1.35rem;
+  line-height: 1.3;
+  font-weight: 600;
+  margin: 0;
+}
+
+.paper-head > p {                        /* author / venue line */
+  color: var(--card-ink-muted);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* the link row */
+.paper-head ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+}
+
+.paper-head li { margin: 0; }
+
+.paper-head li a {
+  display: inline-block;
+  padding: 0.35em 0.9em;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--card-ink);
+  background: #fff;
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+}
+
+.paper-head li a:hover,
+.paper-head li a:focus-visible {
+  background: var(--accent-blue-bg);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+.paper-head li a:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   POST DATES
+   --------------------------------------------------------------------------
+   .post-date  — the line injected under <h1 class="title"> on a post page
+   .post-list  — the generated blog index (sitemap)
+   ========================================================================== */
+.post-date {
+  margin: -0.4rem 0 1.6rem;
+  color: var(--card-ink-muted);
+  font: 500 0.9rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.02em;
+}
+
+.post-list ul,
+ul.post-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.post-list li {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.post-list li:last-child { border-bottom: none; }
+
+.post-list .post-date {
+  margin: 0;
+  flex: 0 0 6.5rem;                      /* fixed gutter so titles line up */
+  font-size: 0.85rem;
+}
+
+/* stack date above title on narrow screens */
+@media (max-width: 30rem) {
+  .post-list li { display: block; }
+  .post-list .post-date { margin-bottom: 0.15rem; }
+  .paper-head > p:first-of-type { font-size: 1.15rem; }
+}
+
+/* ==========================================================================
+   DARK MODE (al-folio ships a dark theme toggle; drop this block if you
+   don't use one). Only the tokens change — no rule below needs touching.
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --card-bg:        #161a20;
+    --card-bg-tint:   #1b2029;
+    --card-border:    #2a313b;
+    --card-ink:       #e6e9ee;
+    --card-ink-muted: #98a2b3;
+
+    --accent-blue-bg: #16233d;
+    --accent-slate-bg:#1b2029;
+    --accent-amber-bg:#2a2113;
+    --accent-green-bg:#132a1c;
+  }
+  .card pre,
+  .card .org-src-container { background-color: #10141a; }
+  .paper-head li a { background: #10141a; }
+}

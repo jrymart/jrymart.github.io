@@ -1,6 +1,33 @@
 (defconst site-root
   (file-name-directory (or load-file-name buffer-file-name)))
 
+(require 'ox-publish)
+(require 'ox-html)
+
+(defvar site-root (file-name-directory (or load-file-name buffer-file-name)))
+
+(add-to-list 'load-path (expand-file-name "lisp" site-root))
+(require 'site-extras)
+
+;; Set global bibliography for org-cite
+(setq org-cite-global-bibliography '("~/notes/references.bib"))
+
+;; Use custom CSL style (no parentheses around inline citations)
+(setq org-cite-csl-styles-dir (expand-file-name "assets" site-root))
+(setq org-cite-export-processors '((html . (csl "citation-style.csl"))
+                                   (t . (csl "citation-style.csl"))))
+
+;; Convert local asset paths to web-root-relative paths on export
+(defun my/fix-asset-paths (output backend info)
+  "Convert local asset paths to web-root-relative paths."
+  (when (eq backend 'html)
+    (replace-regexp-in-string
+     (concat "file://" (regexp-quote (expand-file-name "assets/" site-root)))
+     "/assets/"
+     output)))
+
+(add-to-list 'org-export-filter-final-output-functions #'my/fix-asset-paths)
+
 ;; Navigation HTML
 (defconst site-nav
   "<nav>

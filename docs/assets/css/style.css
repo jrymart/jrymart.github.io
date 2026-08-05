@@ -239,3 +239,84 @@ details summary {
 details summary:hover {
   color: #555;
 }
+
+/* ==========================================================================
+   Citations and Bibliography
+   ========================================================================== */
+
+/* Inline citations */
+a[href^="#citeproc_bib_item_"] {
+  background: var(--bg-subtle);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+/* Bibliography section */
+.csl-bib-body {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.csl-bib-body::before {
+  content: "References";
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.csl-entry {
+  margin-bottom: 1rem;
+  padding-left: 2em;
+  text-indent: -2em;
+  line-height: 1.5;
+}
+
+.csl-entry + .csl-entry {
+  margin-top: 0.75rem;
+}
+
+/* ==========================================================================
+   Figures and Images (enhanced)
+   ========================================================================== */
+
+figure, .figure {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+figure img, .figure img {
+  display: block;
+  margin: 0 auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+figcaption, .figure p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  font-style: italic;
+  text-align: center;
+}
+
+/* Content images */
+.outline-text-2 img,
+.outline-text-3 img,
+#content p > img {
+  display: block;
+  margin: 1.5rem auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove shadow for SVGs (usually diagrams) */
+img[src$=".svg"] {
+  box-shadow: none;
+  background: var(--bg-subtle);
+  padding: 1rem;
+  border-radius: 4px;
+}
